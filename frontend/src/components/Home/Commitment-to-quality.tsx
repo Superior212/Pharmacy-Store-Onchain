@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ShieldCheck, FileText, Network } from "lucide-react";
 import MemoTransparency from "@/icons/Transparency";
 import MemoSecure from "@/icons/Secure";
 import MemoRecords from "@/icons/Records";

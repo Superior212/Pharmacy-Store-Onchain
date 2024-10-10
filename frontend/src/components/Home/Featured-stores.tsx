@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Star, ArrowRight } from "lucide-react";
+import { Star } from "lucide-react";
 
 export default function FeaturedPharmacyStores() {
   return (

@@ -1,11 +1,10 @@
 import MemoConsulatation from "@/icons/Consulatation";
 import MemoDelevery from "@/icons/Delevery";
 import MemoDrugs1 from "@/icons/Drugs1";
-import Image from "next/image";
 
 export default function CareService() {
   return (
-    <div className="bg-gray-100 p-6 md:p-12 rounded-3xl">
+    <div className="bg-[#EFEFEF] hsection my-10 p-6 md:p-12 rounded-3xl">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
           Comprehensive Care Services
@@ -19,13 +18,11 @@ export default function CareService() {
             <ServiceCard
               imageUrl={<MemoDrugs1 className="w-full h-full" />}
               title="Prescription Filling"
-              bgColor="bg-orange-200"
             />
           </div>
           <ServiceCard
             imageUrl={<MemoDelevery className="w-full h-full" />}
             title="Home Delivery"
-            bgColor="bg-green-200"
           />
           <div className="relative sm:top-10">
             <ServiceCard
@@ -33,7 +30,6 @@ export default function CareService() {
                 <MemoConsulatation className="w-full h-full relative" />
               }
               title="Health Consultations"
-              bgColor="bg-gray-200"
             />
           </div>
         </div>
@@ -45,10 +41,9 @@ export default function CareService() {
 interface ServiceCardProps {
   imageUrl: React.ReactNode;
   title: string;
-  bgColor: string;
 }
 
-function ServiceCard({ imageUrl, title, bgColor }: ServiceCardProps) {
+function ServiceCard({ imageUrl, title }: ServiceCardProps) {
   return (
     <div className={`rounded-2xl overflow-hidden`}>
       <div className="relative h-52">{imageUrl}</div>
