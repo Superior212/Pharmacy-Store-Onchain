@@ -24,7 +24,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white fixed w-full top-0 z-10 shadow-lg">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
