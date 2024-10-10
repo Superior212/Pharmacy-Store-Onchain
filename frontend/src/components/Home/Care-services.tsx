@@ -4,7 +4,7 @@ import MemoDrugs1 from "@/icons/Drugs1";
 
 export default function CareService() {
   return (
-    <div className="bg-gray-100 p-6 md:p-12 rounded-3xl">
+    <div className="bg-[#EFEFEF] hsection my-10 p-6 md:p-12 rounded-3xl">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
           Comprehensive Care Services
