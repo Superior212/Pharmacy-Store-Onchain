@@ -3,8 +3,8 @@ import MemoHeroCircle from "@/icons/HeroCircle";
 
 export default function Hero() {
   return (
-    <div className="bg-[#0169FE] hsection my-4 container text-white p-4 sm:p-8 md:p-16 rounded-3xl relative overflow-hidden">
-      <div className="max-w-4xl mx-auto relative z-10">
+    <div className="bg-[#0169FE] hsection my-4 container text-white p-4 sm:p-8 md:p-16 rounded-3xl  overflow-hidden">
+      <div className="max-w-4xl mx-auto ">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center sm:text-left">
           SMART PHARMACEUTICALS
         </h1>
@@ -24,7 +24,7 @@ export default function Hero() {
             </div>
           </div>
           <div className="w-full sm:w-1/3 flex justify-center sm:justify-end">
-            <MemoHeroCircle className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80" />
+            <MemoHeroCircle className="w-48  h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80" />
           </div>
         </div>
       </div>
