@@ -59,7 +59,7 @@ interface StoreCardProps {
   priceUsd: number;
 }
 
-function StoreCard({
+export function StoreCard({
   imageUrl,
   name,
   rating,
