@@ -51,5 +51,15 @@ contract UserManagement is Ownable {
         bytes32 verificationHash;
     }
 
+    mapping(address => CustomerProfile) private customerProfiles;
+    mapping(address => PharmacyProfile) private pharmacyProfiles;
+    mapping(address => DoctorProfile) private doctorProfiles;
+    mapping(address => Role) private userRoles;
+
+    event UserRegistered(address indexed user, Role role);
+    event UserVerified(address indexed user, bytes32 verificationHash);
+
+    constructor() Ownable(msg.sender) {}
+
   
 }
