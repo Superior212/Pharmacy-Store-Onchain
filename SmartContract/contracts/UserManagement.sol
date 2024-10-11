@@ -17,7 +17,7 @@ contract UserManagement is Ownable {
         Doctor
     }
 
-    struct CustomerProfile {
+    struct PatientProfile {
         string firstName;
         string lastName;
         string dob;
@@ -51,7 +51,7 @@ contract UserManagement is Ownable {
         bytes32 verificationHash;
     }
 
-    mapping(address => CustomerProfile) private customerProfiles;
+    mapping(address => PatientProfile) private customerProfiles;
     mapping(address => PharmacyProfile) private pharmacyProfiles;
     mapping(address => DoctorProfile) private doctorProfiles;
     mapping(address => Role) private userRoles;
@@ -61,5 +61,23 @@ contract UserManagement is Ownable {
 
     constructor() Ownable(msg.sender) {}
 
-  
+   function registerPatient(
+        string memory _firstName,
+        string memory _lastName,
+        string memory _dob,
+        string memory _healthInfo ) public {
+
+        if (msg.sender == address(0)) {
+            revert AddressZeroDetected();
+        }
+
+        if (customerProfiles[msg.sender].isRegistered) {
+            revert AlreadyRegistered();
+        }
+
+        customerProfiles[msg.sender] = PatientProfile(_firstName, _lastName, _healthInfo, _dob, true);
+        userRoles[msg.sender] = Role.Customer;
+
+        emit UserRegistered(msg.sender, Role.Customer);
+    }
 }
