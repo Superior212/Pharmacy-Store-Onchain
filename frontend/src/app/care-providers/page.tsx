@@ -1,6 +1,7 @@
 'use client';
 import React, {useState} from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const ProfileSetup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -113,7 +114,7 @@ const ProfileSetup: React.FC = () => {
               />
               {imagePreview1 && (
                 <div className="flex justify-center mt-4">
-                  <img
+                  <Image
                     src={imagePreview1}
                     alt="Preview"
                     className="w-10 h-10  object-contain border-gray-300 rounded-md"
@@ -152,7 +153,7 @@ const ProfileSetup: React.FC = () => {
               />
               {imagePreview2 && (
                 <div className="flex justify-center mt-4">
-                  <img
+                  <Image
                     src={imagePreview2}
                     alt="Preview"
                     className="w-10 h-10  object-contain border-gray-300 rounded-md"

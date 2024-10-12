@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const ProfileSetup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -78,7 +79,6 @@ const ProfileSetup: React.FC = () => {
           </div>
           <div>
             <select
-              aria-placeholder="Years Of Experience"
               onChange={handleInputChange}
               className="mt-1 block w-full outline-none bg-gray-100 rounded-md shadow-sm p-2"
             >
@@ -165,16 +165,21 @@ const ProfileSetup: React.FC = () => {
               onChange={handleImageUpload}
               accept="image/*"
             />
-            {imagePreview && (
+            
           <div className="flex justify-center mt-4">
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="w-10 h-10  object-contain border-gray-300 rounded-md"
-            />
+          {imagePreview && (
+              <div className="relative">
+                <Image
+                  src={imagePreview}
+                  alt="Product Preview"
+                  width={300}
+                  height={300}
+                  className="object-cover rounded-md"
+                />
+              </div>
+            )}
           </div>
-        )}
-          </div>
+        </div>
         </div>
 
         
@@ -197,6 +202,7 @@ const ProfileSetup: React.FC = () => {
         </button>
       </form>
     </div>
+    
   );
 };
 
