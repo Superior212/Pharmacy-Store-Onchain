@@ -108,4 +108,30 @@ contract UserManagement is Ownable {
 
         emit UserRegistered(msg.sender, Role.Pharmacy);
     }
+
+    function registerDoctor(
+        string memory _firstName,
+        string memory _lastName,
+        string memory _about,
+        string memory _yearsOfExperience,
+        string memory _clinicName,
+        string memory _licenseNumber,
+        string memory _medicalCertificateHash,
+        string memory _verificationHash
+    ) public {
+        _checkAddress();
+
+        if (doctorProfiles[msg.sender].isRegistered) {
+            revert AlreadyRegistered();
+        }
+
+        doctorProfiles[msg.sender] = DoctorProfile(
+            _firstName, _lastName, _about, _yearsOfExperience, _clinicName,
+            _licenseNumber, _medicalCertificateHash, true, false, _verificationHash
+        );
+
+        userRoles[msg.sender] = Role.Doctor;
+
+        emit UserRegistered(msg.sender, Role.Doctor);
+    }
 }
