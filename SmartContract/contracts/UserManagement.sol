@@ -7,15 +7,11 @@ contract UserManagement is Ownable {
     error NotDoctor();
     error NotPharmacy();
     error InvalidRole();
-    error NotAccountOwner();
+    error NotRegistered();
     error AlreadyRegistered();
     error AddressZeroDetected();
 
-    enum Role {
-        Customer,
-        Pharmacy,
-        Doctor
-    }
+    enum Role { None, Customer, Pharmacy, Doctor }
 
     struct PatientProfile {
         string firstName;
@@ -27,7 +23,7 @@ contract UserManagement is Ownable {
 
     struct PharmacyProfile {
         string storeName;
-        uint16 businessNumber;
+        uint32 businessNumber;
         string clinicName;
         string storeAddress;
         string pharmacyName;
@@ -35,7 +31,7 @@ contract UserManagement is Ownable {
         string licenseNumber;
         bool isRegistered;
         bool isVerified;
-        bytes32 verificationHash;
+        string verificationHash;
     }
 
     struct DoctorProfile {
@@ -45,10 +41,10 @@ contract UserManagement is Ownable {
         string yearsOfExperience;
         string clinicName;
         string licenseNumber;
-        string medicalCertificate;
+        string medicalCertificateHash;
         bool isRegistered;
         bool isVerified;
-        bytes32 verificationHash;
+        string verificationHash;
     }
 
     mapping(address => PatientProfile) private customerProfiles;
@@ -57,27 +53,59 @@ contract UserManagement is Ownable {
     mapping(address => Role) private userRoles;
 
     event UserRegistered(address indexed user, Role role);
-    event UserVerified(address indexed user, bytes32 verificationHash);
+    event UserVerified(address indexed user, string verificationHash);
 
     constructor() Ownable(msg.sender) {}
 
-   function registerPatient(
-        string memory _firstName,
-        string memory _lastName,
-        string memory _dob,
-        string memory _healthInfo ) public {
-
+    function _checkAddress() internal view {
         if (msg.sender == address(0)) {
             revert AddressZeroDetected();
         }
+    }
+
+    function registerPatient(
+        string memory _firstName,
+        string memory _lastName,
+        string memory _dob,
+        string memory _healthInfo
+    ) public {
+        _checkAddress(); 
 
         if (customerProfiles[msg.sender].isRegistered) {
             revert AlreadyRegistered();
         }
 
-        customerProfiles[msg.sender] = PatientProfile(_firstName, _lastName, _healthInfo, _dob, true);
+        customerProfiles[msg.sender] = PatientProfile(
+            _firstName, _lastName, _dob, _healthInfo, true
+        );
         userRoles[msg.sender] = Role.Customer;
 
         emit UserRegistered(msg.sender, Role.Customer);
+    }
+
+    function registerPharmacy(
+        string memory _storeName,
+        uint32 _businessNumber,
+        string memory _clinicName,
+        string memory _storeAddress,
+        string memory _pharmacyName,
+        string memory _ownerAddress,
+        string memory _licenseNumber,
+        string memory _verificationHash
+    ) public {
+        _checkAddress();
+
+        if (pharmacyProfiles[msg.sender].isRegistered) {
+            revert AlreadyRegistered();
+        }
+
+        pharmacyProfiles[msg.sender] = PharmacyProfile(
+            _storeName, _businessNumber, _clinicName, _storeAddress,
+            _pharmacyName, _ownerAddress, _licenseNumber, true, false, _verificationHash
+        );
+
+        userRoles[msg.sender] = Role.Pharmacy;
+
+        emit UserRegistered(msg.sender, Role.Pharmacy);
     }
 }
