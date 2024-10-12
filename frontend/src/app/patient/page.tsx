@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { useRouter } from 'next/navigation';
 
-const page: React.FC = () => {
+const Page = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [description, setDescription] = useState('');
@@ -105,4 +105,4 @@ const page: React.FC = () => {
   )
 }
 
-export default page
+export default Page
