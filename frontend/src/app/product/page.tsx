@@ -5,7 +5,9 @@ import { Calendar } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 const CustomDatePickerInput = React.forwardRef(({ value, onClick, placeholder, className }:any, ref:any) => (
+  
   <div className="relative">
     <input
       ref={ref}
@@ -20,10 +22,32 @@ const CustomDatePickerInput = React.forwardRef(({ value, onClick, placeholder, c
 ));
 
 const AddProduct: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('Patient');
   const [expiryDate, setExpiryDate] = useState<Date | null>(null);
    const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [prescriptionRequired, setPrescriptionRequired] = useState(false);
+
+   const [formData, setFormData] = useState({
+    productName: '',
+    price: '',
+    category: '',
+    quantity: '',
+    brand: '',
+    expiryDate: '',
+    drugType: '',
+    priceInput: '',
+    prescriptionRequired: '',
+    image: null as File | null,
+    description: '',
+    connectWallet: false
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+    }));
+  };
+  
 
   const inputClass = "bg-gray-100 p-3 rounded-md w-full text-black outline-none";
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,20 +64,8 @@ const AddProduct: React.FC = () => {
   return (
     <div className="md:w-3/4 w-full m-auto p-7">
       <main>
-        <h2 className="text-3xl text-gray-600 ml-5 mt-20 font-bold mb-10">Add Product</h2>
-        <div className="flex space-x-2 mb-6">
-          {['Patient', 'Health Officers', 'Care Providers'].map((tab) => (
-            <button
-              key={tab}
-              className={`px-4 py-2 rounded-full ${
-                activeTab === tab ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
-              }`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <h2 className="text-3xl text-gray-600 ml-5 mt-20 pt-10  border-b pb-3 font-bold mb-10">Add Product</h2>
+        
         <form className="space-y-7">
             <div className="grid gap-6 grid-cols-2">
 
@@ -61,11 +73,13 @@ const AddProduct: React.FC = () => {
             type="text"
             placeholder="Enter drug/product name"
             className={inputClass}
+            onChange={handleInputChange}
           />
           <input
             type="text"
             placeholder="Enter price in ETH or local currency"
             className={inputClass}
+            onChange={handleInputChange}
           />
             </div>
             <div className="grid gap-6 grid-cols-2">
@@ -83,6 +97,7 @@ const AddProduct: React.FC = () => {
             type="number"
             placeholder="Enter quantity in stock"
             className={inputClass}
+            onChange={handleInputChange}
           />
           </div>
           <div className="grid gap-6 grid-cols-2">
@@ -110,6 +125,7 @@ const AddProduct: React.FC = () => {
             type="text"
             placeholder="drug type(Tablet, Syrup, Injection, Cream,)"
             className={inputClass}
+            onChange={handleInputChange}
           />
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -121,6 +137,7 @@ const AddProduct: React.FC = () => {
             type="number"
             placeholder="Enter quantity in stock"
             className={inputClass}
+            onChange={handleInputChange}
           />
             </div>
             <div className="grid gap-6 grid-cols-4">
@@ -133,6 +150,7 @@ const AddProduct: React.FC = () => {
                   name="prescriptionRequired"
                   value="yes"
                   className="mr-2 h-5 w-5 rounded-sm text-blue-500 focus:ring-blue-500"
+                  
                   
                 />
                 <span className="text-gray-500">Yes</span>
@@ -173,6 +191,8 @@ const AddProduct: React.FC = () => {
                 type="checkbox"
                 name="connectWallet"
                 className="mr-2 border rounded-sm text-blue-500 focus:ring-blue-500"
+                onChange={handleInputChange}
+                checked={formData.connectWallet}
               />
             </label>
           </div>
@@ -181,6 +201,7 @@ const AddProduct: React.FC = () => {
               name="description"
               placeholder="Description"
               className=" h-full outline-none bg-gray-100 p-2 rounded-md resize-none"
+              onChange={handleInputChange}
               
             ></textarea>
           </div>
