@@ -181,6 +181,15 @@ const AddProduct: React.FC = () => {
             onChange={handleImageUpload}
             accept="image/*"
           />
+          {imagePreview && (
+          <div className="flex justify-center mt-4">
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="w-10 h-10  object-contain border-gray-300 rounded-md"
+            />
+          </div>
+        )}
         </div>
     </div>
     <div className="col-span-4 grid grid-cols-4 gap-4">
