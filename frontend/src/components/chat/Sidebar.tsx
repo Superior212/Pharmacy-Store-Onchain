@@ -1,4 +1,4 @@
-// components/Sidebar.tsx
+import Image from 'next/image';
 import React from 'react';
 
 const Sidebar: React.FC = () => {
@@ -27,8 +27,10 @@ const Sidebar: React.FC = () => {
                     <label className="font-medium mb-2 flex justify-between">
                         Create Prescription
                         <div className="flex bg-[#1565C01A] p-2 rounded">
-                        <button className=" text-xs font-normal w-20 ">Add New</button>
-                        <img
+                        <button className=" text-xs font-medium opacity-40 w-20 ">Add New</button>
+                        <Image
+                            width={20}
+                            height={20}
                             src="/gg_add.png"
                             alt="out"
                         />

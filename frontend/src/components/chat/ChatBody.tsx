@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 interface Message {
@@ -60,7 +61,9 @@ const ChatBody: React.FC = () => {
             <div className="p-4  text-[#000000D9] flex items-center justify-between relative border-b border-[#EEEEEE]">
                 {/* Doctor Info */}
                 <div className="flex items-center space-x-3">
-                    <img
+                    <Image
+                        width={20}
+                        height={20}
                         src="/doctor-avatar.png"
                         alt="Doctor"
                         className="w-10 h-10 rounded-full"
@@ -70,7 +73,9 @@ const ChatBody: React.FC = () => {
                         <p className="text-sm text-[#1364FF]">Online</p>
                     </div>
                 </div>
-                <img
+                <Image
+                    width={20}
+                    height={20}
                     src="/vector.svg"
                     alt=""
                     className="w-5 h-5 rounded-full"
@@ -89,7 +94,9 @@ const ChatBody: React.FC = () => {
                 {messages.map((message, index) => (
                     <div key={index} className={`flex ${message.sender === 'patient' ? 'justify-end' : ''}`}>
                         {message.sender === 'doctor' && (
-                            <img
+                            <Image
+                                width={20}
+                                height={20}
                                 src="/doctor-avatar.png"
                                 alt="Doctor"
                                 className="w-8 h-8 rounded-full mr-2"
@@ -105,7 +112,9 @@ const ChatBody: React.FC = () => {
 
             {/* Chat Input */}
             <div className="my-4 flex items-center border-t border-[#EEEEEE] p-4" >
-                <img
+                <Image
+                    width={20}
+                    height={20}
                     src="/attachment.svg"
                     alt="add documents"
                 // className="w-10 h-10 rounded-full"
