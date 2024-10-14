@@ -2,6 +2,11 @@ import React from 'react'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 
+
+interface HeroProps {
+  
+}
+
 const Hero = () => {
   return (
     <div className='flex bg-[#0169FE] w-full h-[30rem] rounded-3xl pb-[3.813rem] pt-[7.063rem] px-5 md:pl-[2.375rem] mb-[2.68rem]'> 
