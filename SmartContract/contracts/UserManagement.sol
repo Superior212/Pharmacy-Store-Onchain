@@ -208,4 +208,11 @@ contract UserManagement is Ownable {
 
         return pharmacyProfiles[_pharmacy].isVerified;
     }
+
+    function isDoctorVerified(address _doctor) public view returns (bool) {
+
+        if (!doctorProfiles[_doctor].isRegistered) revert NotDoctor();
+
+        return doctorProfiles[_doctor].isVerified;
+    }
 }
