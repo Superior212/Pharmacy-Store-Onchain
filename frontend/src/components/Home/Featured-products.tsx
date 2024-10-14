@@ -6,10 +6,10 @@ export default function FeaturedProducts() {
     <div className="bg-[#202E48] text-white p-6 md:p-12 rounded-3xl">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold">Featured Products</h2>
+          <h2 className="text-3xl font-bold">Featured Products</h2>
           <a
             href="#"
-            className="text-sm text-gray-300 hover:text-white transition-colors">
+            className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
             All Products
           </a>
         </div>
@@ -61,30 +61,23 @@ function ProductCard({
   priceUsd,
 }: ProductCardProps) {
   return (
-    <div className="bg-navy-800 rounded-2xl overflow-hidden">
+    <div className="bg-[#2A3A59] rounded-2xl overflow-hidden">
       <div className="relative h-48 md:h-64">
-        <Image
-          src={imageUrl}
-          className="rounded-3xl"
-          alt={name}
-          layout="fill"
-          objectFit="cover"
-        />
-        <div className="absolute top-2 right-2 bg-white rounded-full p-2"></div>
+        <Image src={imageUrl} alt={name} layout="fill" objectFit="cover" />
       </div>
       <div className="p-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold mb-2">{name}</h3>
-          <div className="flex items-center mb-2">
-            <Star className="w-4 h-4 text-yellow-400 mr-1" />
-            <span>{rating}</span>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-lg font-semibold">{name}</h3>
+          <div className="flex items-center">
+            <Star className="w-4 h-4 text-yellow-400 mr-1 fill-yellow-400" />
+            <span className="text-sm">{rating}</span>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm">
+          <span className="text-sm text-gray-300">
             {priceEth} ETH / ${priceUsd}
           </span>
-          <button className="bg-[#1364FF] text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
             Add to Cart
           </button>
         </div>
