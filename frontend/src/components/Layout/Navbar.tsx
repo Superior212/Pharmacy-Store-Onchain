@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import MemoLogo from "@/icons/Logo";
+// import MemoLogo from "@/icons/Logo";
 import Logo from "../../../public/Logo.svg"
 import Image from "next/image";
 

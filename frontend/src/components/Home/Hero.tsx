@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import MemoHeroCircle from "@/icons/HeroCircle";
+// import MemoHeroCircle from "@/icons/HeroCircle";
 import Image from "next/image";
 // import HeroLogo from "../../../../public/HeroLogo.svg"
 
