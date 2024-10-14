@@ -1,17 +1,25 @@
 import { Request, Response } from 'express';
 import Medication, { IMedication } from '../Models/DrugModel';
 
-export const createMedication = async (req: Request, res: Response): Promise<void> => {
+export const uploadMedication = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { medicationName, medicationcategory, medicationImageUrl } = req.body;
-        //add quantity
-        const medication = new Medication({ medicationName, medicationcategory, medicationImageUrl });
+        const {
+            productName, category, brandName, drugType, isPrescriptionRequired,
+            price, expiryDate, description, medicationImageUrl, quantityInStock
+        } = req.body;
+
+        const medication = new Medication({
+            productName, category, brandName, drugType, isPrescriptionRequired,
+            price, expiryDate, description, medicationImageUrl, quantityInStock
+        });
+
         const savedMedication = await medication.save();
-        res.status(201).json({ message: 'Medication created successfully', medication: savedMedication });
+        res.status(201).json({ message: 'Medication updated successfully', medication: savedMedication });
     } catch (error) {
         res.status(500).json({ message: 'Error creating medication', error });
     }
 };
+
 
 // export const listMedications = async (req: Request, res: Response): Promise<void> => {
 //     try {
@@ -30,12 +38,12 @@ export const unlistMedication = async (req: Request, res: Response): Promise<voi
             { new: true }
         );
         if (!medication) {
-            res.status(404).json({ message: 'Medication not found' });
+            res.status(404).json({ message: 'Drug not found' });
         } else {
-            res.status(200).json({ message: 'Medication unlisted successfully', medication });
+            res.status(200).json({ message: 'Drug unlisted successfully', medication });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error unlisting medication', error });
+        res.status(500).json({ message: 'Error unlisting thid Drug', error });
     }
 };
 
@@ -54,12 +62,14 @@ export const getMedication = async (req: Request, res: Response): Promise<void> 
 
 export const updateMedication = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { medicationName, medicationCategory, medicationImageUrl } = req.body;
+        const { productName, category, brandName, drugType, price, expiryDate, description, medicationImageUrl, quantityInStock } = req.body;
+
         const medication = await Medication.findByIdAndUpdate(
             req.params.id,
-            { medicationName, medicationCategory, medicationImageUrl },
+            { productName, category, brandName, drugType, price, expiryDate, description, medicationImageUrl, quantityInStock },
             { new: true }
         );
+
         if (!medication) {
             res.status(404).json({ message: 'Medication not found' });
         } else {
@@ -69,7 +79,8 @@ export const updateMedication = async (req: Request, res: Response): Promise<voi
         res.status(500).json({ message: 'Error updating medication', error });
     }
 };
-export const updateAvailability = async (req: Request, res: Response): Promise<void> => {
+
+export const updateDrugAvailability = async (req: Request, res: Response): Promise<void> => {
     try {
         const { isAvailable } = req.body;
         const medication = await Medication.findByIdAndUpdate(
@@ -86,7 +97,6 @@ export const updateAvailability = async (req: Request, res: Response): Promise<v
         res.status(500).json({ message: 'Error updating availability', error });
     }
 };
-
 
 export const deleteMedication = async (req: Request, res: Response): Promise<void> => {
     try {
