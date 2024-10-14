@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-contract PharmX {
+contract MedicineMarketPlace {
 
     struct Medication {
         uint256 id;
