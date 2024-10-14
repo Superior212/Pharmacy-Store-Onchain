@@ -9,6 +9,7 @@ contract UserManagement is Ownable {
     error InvalidRole();
     error NotRegistered();
     error AlreadyRegistered();
+    error AlreadyHasRole();
     error AddressZeroDetected();
 
     enum Role { None, Customer, Pharmacy, Doctor }
@@ -24,27 +25,25 @@ contract UserManagement is Ownable {
     struct PharmacyProfile {
         string storeName;
         uint32 businessNumber;
+        string pharmacyOwnerName;
+        string storeLocation;
         string clinicName;
-        string storeAddress;
-        string pharmacyName;
-        string ownerAddress;
-        string licenseNumber;
+        string businessNumberCertificateHash;
+        string licenseNumberCertificateHash;
         bool isRegistered;
         bool isVerified;
-        string verificationHash;
     }
 
     struct DoctorProfile {
         string firstName;
         string lastName;
         string about;
-        string yearsOfExperience;
+        uint32 yearsOfExperience;
         string clinicName;
-        string licenseNumber;
+        uint32 licenseNumber;
         string medicalCertificateHash;
         bool isRegistered;
         bool isVerified;
-        string verificationHash;
     }
 
     mapping(address => PatientProfile) private customerProfiles;
@@ -53,13 +52,19 @@ contract UserManagement is Ownable {
     mapping(address => Role) private userRoles;
 
     event UserRegistered(address indexed user, Role role);
-    event UserVerified(address indexed user, string verificationHash);
+    event UserVerified(address indexed user);
 
     constructor() Ownable(msg.sender) {}
 
     function _checkAddress() internal view {
         if (msg.sender == address(0)) {
             revert AddressZeroDetected();
+        }
+    }
+
+    function _checkRole() internal view {
+        if (userRoles[msg.sender] != Role.None) {
+            revert AlreadyHasRole();
         }
     }
 
@@ -70,6 +75,7 @@ contract UserManagement is Ownable {
         string memory _healthInfo
     ) public {
         _checkAddress(); 
+        _checkRole();
 
         if (customerProfiles[msg.sender].isRegistered) {
             revert AlreadyRegistered();
@@ -86,22 +92,22 @@ contract UserManagement is Ownable {
     function registerPharmacy(
         string memory _storeName,
         uint32 _businessNumber,
+        string memory _pharmacyOwnerName,
+        string memory _storeLocation,
         string memory _clinicName,
-        string memory _storeAddress,
-        string memory _pharmacyName,
-        string memory _ownerAddress,
-        string memory _licenseNumber,
-        string memory _verificationHash
+        string memory _businessNumberCertificateHash,
+        string memory _licenseNumberCertificateHash
     ) public {
         _checkAddress();
+        _checkRole();
 
         if (pharmacyProfiles[msg.sender].isRegistered) {
             revert AlreadyRegistered();
         }
 
         pharmacyProfiles[msg.sender] = PharmacyProfile(
-            _storeName, _businessNumber, _clinicName, _storeAddress,
-            _pharmacyName, _ownerAddress, _licenseNumber, true, false, _verificationHash
+            _storeName, _businessNumber, _pharmacyOwnerName,
+            _storeLocation, _clinicName, _businessNumberCertificateHash, _licenseNumberCertificateHash, true, false
         );
 
         userRoles[msg.sender] = Role.Pharmacy;
@@ -113,13 +119,13 @@ contract UserManagement is Ownable {
         string memory _firstName,
         string memory _lastName,
         string memory _about,
-        string memory _yearsOfExperience,
+        uint32 _yearsOfExperience,
         string memory _clinicName,
-        string memory _licenseNumber,
-        string memory _medicalCertificateHash,
-        string memory _verificationHash
+        uint32 _licenseNumber,
+        string memory _medicalCertificateHash
     ) public {
         _checkAddress();
+        _checkRole();
 
         if (doctorProfiles[msg.sender].isRegistered) {
             revert AlreadyRegistered();
@@ -127,9 +133,9 @@ contract UserManagement is Ownable {
 
         doctorProfiles[msg.sender] = DoctorProfile(
             _firstName, _lastName, _about, _yearsOfExperience, _clinicName,
-            _licenseNumber, _medicalCertificateHash, true, false, _verificationHash
+            _licenseNumber, _medicalCertificateHash, true, false
         );
-
+        
         userRoles[msg.sender] = Role.Doctor;
 
         emit UserRegistered(msg.sender, Role.Doctor);
