@@ -158,4 +158,25 @@ contract UserManagement is Ownable {
             profile.healthInfo
         );
     }
+
+    function getPharmacyProfile(address _user) public view
+        returns ( string memory, uint32, string memory, string memory, 
+                string memory, string memory, string memory, bool, bool
+        )
+    {
+        PharmacyProfile memory profile = pharmacyProfiles[_user];
+        if (!profile.isRegistered) revert NotRegistered();
+
+        return (
+            profile.storeName,
+            profile.businessNumber,
+            profile.pharmacyOwnerName,
+            profile.storeLocation,
+            profile.clinicName,
+            profile.businessNumberCertificateHash,
+            profile.licenseNumberCertificateHash,
+            profile.isRegistered,
+            profile.isVerified
+        );
+    }
 }
