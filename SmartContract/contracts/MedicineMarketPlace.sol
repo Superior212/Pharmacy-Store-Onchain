@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.17;
 
 contract PharmX {
 
@@ -23,10 +23,10 @@ contract PharmX {
 
     mapping(uint256 => Medication) public medications;
 
-    event MedicationCreated(uint256 id, string productName, uint256 pricePerUnit, uint256 stockQuantity, address owner);
-    event MedicationListedStatusUpdated(uint256 id, bool isListed);
-    event MedicationAvailabilityUpdated(uint256 id, bool isAvailable);
-    event MedicationBought(uint256 id, address buyer, uint256 quantityBought, uint256 totalPrice);
+    event MedicationCreated(uint256 indexed id, string productName, uint256 pricePerUnit, uint256 stockQuantity, address indexed owner);
+    event MedicationListedStatusUpdated(uint256 indexed id, bool isListed);
+    event MedicationAvailabilityUpdated(uint256 indexed id, bool isAvailable);
+    event MedicationBought(uint256 indexed id, address buyer, uint256 quantityBought, uint256 totalPrice);
 
     modifier onlyOwner(uint256 medicationId) {
         require(medications[medicationId].owner == msg.sender, "Not the owner");
@@ -104,7 +104,7 @@ contract PharmX {
     }
 
     function updateAvailability(uint256 medicationId, bool _isAvailable) external onlyOwner(medicationId) {
-        
+
         medications[medicationId].isAvailable = _isAvailable;
         emit MedicationAvailabilityUpdated(medicationId, _isAvailable);
     }
