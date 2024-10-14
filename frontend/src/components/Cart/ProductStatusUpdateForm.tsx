@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 
 const ProductStatusUpdateForm = () => {
   return (
-    <form className="flex flex-col gap-4 w-[22.18rem]">
+    <form className="flex flex-col gap-4 w-full lg:w-[22.18rem]">
     <Input
       className="bg-[#F9F9F9] w-full h-[3.25rem] px-5 rounded-lg"
       placeholder="Name of personnel"
