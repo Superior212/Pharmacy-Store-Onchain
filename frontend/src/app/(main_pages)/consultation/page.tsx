@@ -67,7 +67,7 @@ type Transaction = {
   
 
 const tabs = [
-  { name: 'General', path: '/Raynolds-general'},
+  { name: 'General', path: '/Reynolds-general'},
   { name: 'Earning & Wallets', path: '/earning' },
   { name: 'Consultations', path: '/consultation' },
   { name: 'Reviews', path: '/review' },
