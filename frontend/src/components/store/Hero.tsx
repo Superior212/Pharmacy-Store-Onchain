@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from '../ui/button'
-import HeroImage from '../../assets'
 import Image from 'next/image'
 
 const Hero = () => {
