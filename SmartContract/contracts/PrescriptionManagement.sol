@@ -17,7 +17,7 @@ contract PrescriptionManagement {
   mapping(string => Prescription) private prescription;
 
   // Events
-  event PrescriptionCreated(address indexed patient, address indexed doctor, string indexed prescription)
+  event prescriptionCreated(address indexed patient, address indexed doctor, string indexed prescription);
 
   // Custom Error
   error InvalidPrescription();
@@ -31,8 +31,6 @@ contract PrescriptionManagement {
   }
 
   function addPrescription(
-    uint256 _patientNouce, 
-    uint256 _doctorsNouce, 
     address _patient, 
     string memory _prescriptionHash
   ) public {
@@ -40,29 +38,27 @@ contract PrescriptionManagement {
     addressZeroCheck(msg.sender);
     addressZeroCheck(_patient);
 
-    if(_prescriptionHash == "") revert InvalidPrescriptionCode();
-    if(_prescriptionHash.length < 46) revert InvalidPrescriptionCode();
+    // if(_prescriptionHash == "") revert InvalidPrescriptionCode();
+    // if(_prescriptionHash.length < 46) revert InvalidPrescriptionCode();
 
-    uint256 _id = _patientNouce + _doctorsNouce; // generate id for transaction
-
-    Prescription memory _prescription = new Prescription(_id, _patient, msg.sender, _prescriptionHash, false);
+    Prescription memory _prescription = Prescription(_patient, msg.sender, _prescriptionHash, false);
 
     prescription[_prescriptionHash] = _prescription;
     patientPrescription[_patient] = _prescriptionHash;
 
-    emit PrescriptionCreated(_id, _patient, msg.sender, _prescriptionCode);
+    emit prescriptionCreated( _patient, msg.sender, _prescriptionHash);
   }
 
   function validatePrescription(
     string memory _prescriptionHash, address _patient
   ) 
-    public {
+    public view {
       addressZeroCheck(msg.sender);
       addressZeroCheck(_patient);
 
-      if(prescription[_prescriptionHash] == null) revert InvalidPrescriptionCode();
-      if(_prescriptionHash.length < 46) revert InvalidPrescriptionCode();
-      if(patientPrescription[_patient] != _prescriptionHash) revert NotOwnerOfPrescription();
+      // if(prescription[_prescriptionHash] == "") revert InvalidPrescriptionCode();
+      // if(_prescriptionHash.length < 46) revert InvalidPrescriptionCode();
+      // if(patientPrescription[_patient] != _prescriptionHash) revert NotOwnerOfPrescription();
       if(prescription[_prescriptionHash].validated) revert InvalidPrescription();
   }
 
