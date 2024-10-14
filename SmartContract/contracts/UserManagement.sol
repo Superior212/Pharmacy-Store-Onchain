@@ -144,4 +144,18 @@ contract UserManagement is Ownable {
     function getRole(address _user) public view returns (Role) {
         return userRoles[_user];
     }
+
+    function getCustomerProfile(address _user) public view
+        returns (string memory, string memory, string memory, string memory)
+    {
+        PatientProfile memory profile = customerProfiles[_user];
+        if (!profile.isRegistered) revert NotRegistered();
+
+        return (
+            profile.firstName,
+            profile.lastName,
+            profile.dob,
+            profile.healthInfo
+        );
+    }
 }
