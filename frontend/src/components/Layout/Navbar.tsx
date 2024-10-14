@@ -4,7 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import MemoLogo from "@/icons/Logo";
+// import MemoLogo from "@/icons/Logo";
+import Logo from "../../../public/Logo.svg"
+import Image from "next/image";
 
 const NavLink = ({
   href,
@@ -25,17 +27,18 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white sticky w-full top-0 z-10 shadow-lg">
-      <div className="max-w-[80rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center w-full justify-between h-20">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               {/* <span className="text-2xl font-bold text-gray-900">Logo</span>
                */}
-              <MemoLogo className="sm:h-32 sm:w-40 h-28 w-28" />
+               <Image src={Logo} alt="Logo" className="h-18 w-18" />
+              {/* <MemoLogo className="sm:h-32 sm:w-40 h-28 w-28" /> */}
             </Link>
           </div>
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex justify-between items-center gap-4">
               <NavLink href="/">About</NavLink>
               <NavLink href="/stores">Stores</NavLink>
               <Button className="bg-[#FFD700] hover:bg-[#FFD700] rounded-2xl">
