@@ -1,19 +1,21 @@
 import mongoose, { Schema } from 'mongoose';
 
 interface IMedication {
-    name: string;
-    category: string;
-    imageUrl?: string;
+    medicationName: string;
+    medicationCategory: string;
+    medicationImageUrl?: string;
     isListed: boolean;
     isAvailable: boolean;
+    quantity: number
 }
 
 const medicationSchema: Schema = new Schema({
-    name: { type: String, required: true },
-    category: { type: String, required: true },
-    imageUrl: { type: String },
+    medicationName: { type: String, required: true },
+    medicationCategory: { type: String, required: true },
+    medicationImageUrl: { type: String },
     isListed: { type: Boolean, default: true },  
-    isAvailable: { type: Boolean, default: true } 
+    isAvailable: { type: Boolean, default: true },
+    quantity: { type: Number, required: true, default: 0 }
 });
 
 const Medication = mongoose.model<IMedication>('Medication', medicationSchema);
