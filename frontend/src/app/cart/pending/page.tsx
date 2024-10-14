@@ -3,11 +3,11 @@ import OrderHistory from "@/components/Cart/OrderHistory"
 
 const page = () => {
   return (
-    <main className="flex gap-[3.37rem] pt-5">
-      <div>
+    <main className="pt-5">
+ 
       <CartContent/>
-      </div>
-       <OrderHistory/>
+  
+      
     </main>
   )
 }

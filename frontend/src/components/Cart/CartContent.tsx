@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ItemListing from './ItemListing'
+import { TrackingModal } from './TrackingModal'
 
 const CartContent = () => {
+
     return (
-        <div>
+        <>
+            <ItemListing  />
             <ItemListing />
             <ItemListing />
-            <ItemListing />
-        </div>
+            </>
 
     )
 }
