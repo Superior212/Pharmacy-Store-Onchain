@@ -140,4 +140,8 @@ contract UserManagement is Ownable {
 
         emit UserRegistered(msg.sender, Role.Doctor);
     }
+
+    function getRole(address _user) public view returns (Role) {
+        return userRoles[_user];
+    }
 }
