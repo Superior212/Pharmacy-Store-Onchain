@@ -201,4 +201,11 @@ contract UserManagement is Ownable {
             profile.isVerified
         );
     }
+
+    function isPharmacyVerified(address _pharmacy) public view returns (bool) {
+
+        if (!pharmacyProfiles[_pharmacy].isRegistered) revert NotPharmacy();
+
+        return pharmacyProfiles[_pharmacy].isVerified;
+    }
 }
