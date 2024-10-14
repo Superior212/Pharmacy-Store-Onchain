@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 
 export default function FeaturedPharmacyStores() {
   return (
-    <div className="bg-[#EFEFEF] hsection my-10 p-6 md:p-12 rounded-3xl">
+    <div className="bg-[#EFEFEF] my-10 p-6 md:p-12 rounded-3xl">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-start mb-6">
           <div>
@@ -59,7 +59,7 @@ interface StoreCardProps {
   priceUsd: number;
 }
 
-function StoreCard({
+export function StoreCard({
   imageUrl,
   name,
   rating,

@@ -9,7 +9,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow:{
+        cartItem:"0 0 1.6px rgba(0, 0, 0, 0.08)"
+      }
+    },
   },
   plugins: [],
 }

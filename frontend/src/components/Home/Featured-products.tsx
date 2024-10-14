@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 
 export default function FeaturedProducts() {
   return (
-    <div className="bg-[#202E48] hsection text-white p-6 md:p-12 rounded-3xl">
+    <div className="bg-[#202E48] text-white p-6 md:p-12 rounded-3xl">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl md:text-3xl font-bold">Featured Products</h2>
