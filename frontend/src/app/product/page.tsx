@@ -45,7 +45,7 @@ const AddProduct: React.FC = () => {
     quantity: '',
     brand: '',
     expiryDate: '',
-    drugType: '',
+    drugType: '', 
     priceInput: '',
     prescriptionRequired: '',
     image: null as File | null,
