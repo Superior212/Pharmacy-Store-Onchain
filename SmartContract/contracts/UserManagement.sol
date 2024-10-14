@@ -179,4 +179,26 @@ contract UserManagement is Ownable {
             profile.isVerified
         );
     }
+
+    function getDoctorProfile(address _user) public view returns (
+            string memory, string memory, string memory, uint32,
+            string memory, uint32, string memory, bool, bool
+        )
+    {
+        DoctorProfile memory profile = doctorProfiles[_user];
+
+        if (!profile.isRegistered) revert NotRegistered();
+
+        return (
+            profile.firstName,
+            profile.lastName,
+            profile.about,
+            profile.yearsOfExperience,
+            profile.clinicName,
+            profile.licenseNumber,
+            profile.medicalCertificateHash,
+            profile.isRegistered,
+            profile.isVerified
+        );
+    }
 }
