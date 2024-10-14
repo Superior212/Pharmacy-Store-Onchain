@@ -1,9 +1,10 @@
 import Store from '@/components/store/Store'
-import React from 'react'
 
 const page = () => {
   return (
-   <Store/>
+   <div className='w-full'>
+    <Store/>
+   </div>
   )
 }
 
