@@ -3,9 +3,9 @@ import Medication, { IMedication } from '../Models/DrugModel';
 
 export const createMedication = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { name, category, imageUrl } = req.body;
+        const { medicationName, medicationcategory, medicationImageUrl } = req.body;
         //add quantity
-        const medication = new Medication({ name, category, imageUrl });
+        const medication = new Medication({ medicationName, medicationcategory, medicationImageUrl });
         const savedMedication = await medication.save();
         res.status(201).json({ message: 'Medication created successfully', medication: savedMedication });
     } catch (error) {
@@ -54,10 +54,10 @@ export const getMedication = async (req: Request, res: Response): Promise<void> 
 
 export const updateMedication = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { name, category, imageUrl } = req.body;
+        const { medicationName, medicationCategory, medicationImageUrl } = req.body;
         const medication = await Medication.findByIdAndUpdate(
             req.params.id,
-            { name, category, imageUrl },
+            { medicationName, medicationCategory, medicationImageUrl },
             { new: true }
         );
         if (!medication) {
