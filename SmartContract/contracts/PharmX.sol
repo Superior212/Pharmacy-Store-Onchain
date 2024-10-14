@@ -51,7 +51,9 @@ contract PharmX {
         uint256 _expiryDate, 
         bool _isPrescriptionRequired
     ) external {
+
         require(_stockQuantity > 0, "Stock must be greater than zero");
+
         medications[nextMedicationId] = Medication(
             nextMedicationId,
             _productName,
@@ -66,10 +68,12 @@ contract PharmX {
             _isPrescriptionRequired
         );
         emit MedicationCreated(nextMedicationId, _productName, _pricePerUnit, _stockQuantity, msg.sender);
+
         nextMedicationId++;
     }
 
     function purchaseMedication(uint256 medicationId, uint256 purchaseQuantity) external payable {
+
         Medication storage med = medications[medicationId];
         require(med.isListed, "Medication is not listed");
         require(med.isAvailable, "Medication is not available");
@@ -100,6 +104,7 @@ contract PharmX {
     }
 
     function updateAvailability(uint256 medicationId, bool _isAvailable) external onlyOwner(medicationId) {
+        
         medications[medicationId].isAvailable = _isAvailable;
         emit MedicationAvailabilityUpdated(medicationId, _isAvailable);
     }
