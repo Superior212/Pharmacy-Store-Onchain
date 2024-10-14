@@ -215,4 +215,16 @@ contract UserManagement is Ownable {
 
         return doctorProfiles[_doctor].isVerified;
     }
+
+    function verifyUser(address _user, Role role) public onlyOwner {
+        if (role == Role.Pharmacy) {
+            pharmacyProfiles[_user].isVerified = true;
+            emit UserVerified(_user);
+        } else if (role == Role.Doctor) {
+            doctorProfiles[_user].isVerified = true;
+            emit UserVerified(_user);
+        } else {
+            revert InvalidRole();
+        }
+    }
 }
