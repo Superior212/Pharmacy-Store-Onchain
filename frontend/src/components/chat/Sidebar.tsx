@@ -3,7 +3,7 @@ import React from 'react';
 
 const Sidebar: React.FC = () => {
     return (
-        <div className="flex w-1/4 h-screen ">
+        <div className="flex w-1/4">
           
             <div className=" bg-white w-full p-4">
                 <h2 className="text-xl font-medium mb-4">PharmaX Records</h2>
