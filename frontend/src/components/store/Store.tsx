@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from 'react'
 import Hero from './Hero'
-import Search from './Search'
+// import Search from './Search'
 import StoreListing from './StoreListing'
+import Search from '../Medication/Search';
 
 const Store = () => {
 

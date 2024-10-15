@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { Navbar } from "@/components/Layout";
 import Sidebar from "@/components/Cart/Sidebar"
+import "../globals.css";
 
 
 export const metadata: Metadata = {
@@ -15,16 +16,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className="flex flex-col w-full justify-between items-center">
-          <Navbar />
-          <main className="flex flex-col max-w-[64rem] my-10 px-4 sm:px-6 lg:px-8 md:w-[80%] lg:w-[72%] bg-[#FAFAFA] rounded-[0.625rem]">
-            <h3 className="font-bold text-[2.5rem] text-[#5C5B5C] mt-[2.81rem]">Cart</h3>
+   
+ <html>
+             <body
+        className={`antialiased flex flex-col lg:justify-between min-h-screen`}>
+        <Navbar />
+        <main className="container lg:h-screen mx-auto px-4 sm:px-6 lg:px-8 bg-[#FAFAFA] rounded-[0.625rem]">
+            <h3 className="font-bold text-[2.5rem] text-[#5C5B5C]  lg:mt-[2.81rem]">Cart</h3>
             <hr className="w-full h-[0.5px] bg-[#D3D3D3] border-b" />
-            <section className="w-full flex flex-col md:flex-row mt-[17px]">
+            <section className="w-full flex flex-col lg:flex-row mt-[17px]">
                  <Sidebar/>
-                <div className="flex-1 px-[3.43rem]">
+                <div className="lg:flex-1 lg:px-[3.43rem]">
                     {children}
                 </div>
             </section>
@@ -33,3 +35,5 @@ export default function RootLayout({
     </html>
   );
 }
+  
+

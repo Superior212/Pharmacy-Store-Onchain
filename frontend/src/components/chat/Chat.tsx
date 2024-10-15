@@ -7,7 +7,7 @@ import Image from "next/image";
 const ChatWindow = () => {
 
     return (
-        <div className="bg-blue-500 p-12 m-10 rounded-2xl">
+        <div className="w-full mx-auto bg-blue-500 p-12 m-10 rounded-2xl">
             <div className="flex h-screen bg-[#FAFAFA] rounded-2xl">
                 {/* Sidebar */}
                 <div className="relative w-[52px] p-3">

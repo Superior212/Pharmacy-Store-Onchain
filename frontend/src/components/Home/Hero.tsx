@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 
 
@@ -18,11 +19,13 @@ export default function Hero() {
             seamless crypto transactions.
           </p>
           <div className="text-center sm:text-left">
+            <Link href="/meet-a-doctor">
             <Button
               className="bg-white text-black rounded-full px-6 py-2 text-sm sm:text-base"
               size="lg">
               Book Appointment
-            </Button>
+            </Button></Link>
+           
           </div>
         </div>
       </div>
