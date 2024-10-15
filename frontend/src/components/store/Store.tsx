@@ -9,7 +9,7 @@ const Store = () => {
     const [searchText, setSearchText] = useState("")
     
     return (
-      <main className='w-full pt-4 px-4 '>
+      <main className='w-full pt-4'>
           {!searchText && (<Hero/>)}
           <Search searchText={searchText} setSearchText={setSearchText}/>
           <StoreListing searchText={searchText}/>
