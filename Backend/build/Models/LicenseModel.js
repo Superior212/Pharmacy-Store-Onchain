@@ -24,19 +24,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const medicationSchema = new mongoose_1.Schema({
-    productName: { type: String, required: true },
-    category: { type: String, required: true },
-    brandName: { type: String, required: true },
-    drugType: { type: String, required: true },
-    isPrescriptionRequired: { type: Boolean, default: false },
-    price: { type: Number, required: true },
-    expiryDate: { type: String, required: true },
-    description: { type: String, required: true },
-    medicationImageUrl: { type: String },
-    isListed: { type: Boolean, default: true },
-    isAvailable: { type: Boolean, default: true },
-    quantityInStock: { type: Number, required: true, default: 0 },
+const licenseSchema = new mongoose_1.Schema({
+    licenseId: { type: String, required: true, unique: true },
+    fullName: { type: String, required: true },
+    specialization: { type: String, required: true },
+    licenseExpiry: { type: Date, required: true },
+    issuingAuthority: { type: String, required: true },
+    isVerified: { type: Boolean, default: false }
 });
-const Medication = mongoose_1.default.model('Medication', medicationSchema);
-exports.default = Medication;
+const License = mongoose_1.default.model('License', licenseSchema);
+exports.default = License;
