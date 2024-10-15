@@ -74,7 +74,7 @@ const UserProfile = () => {
           </nav>
        </div>
         <main className="">
-         {tabPage === "Patient" ? <General /> : tabPage === "Wallet & Transactions" ? <TransactionTable /> : tabPage === "Consultations" ? <Appointments /> :  <General />}
+         {tabPage === "Patient" ? <General /> : tabPage === "Wallet & Transactions" ? <TransactionTable /> : tabPage === "Consultations" ? <Appointments /> :  <TransactionTable />}
         </main>
     </div>
   )
