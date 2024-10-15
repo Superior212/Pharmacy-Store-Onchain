@@ -1,5 +1,4 @@
 import CartContent from "@/components/Cart/CartContent"
-import OrderHistory from "@/components/Cart/OrderHistory"
 
 const page = () => {
   return (

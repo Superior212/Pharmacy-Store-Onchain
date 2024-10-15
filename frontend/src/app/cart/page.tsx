@@ -1,11 +1,11 @@
-import CartContent from '@/components/Cart/CartContent'
+import CartContent from "@/components/Cart/CartContent";
 
 const page = () => {
   return (
-    <main className='w-full'>
-      <CartContent/>
+    <main className="pt-[1.68rem]">
+      <CartContent />
     </main>
-  )
-}
+  );
+};
 
-export default page
+export default page;
