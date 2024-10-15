@@ -2,6 +2,15 @@
 pragma solidity ^0.8.24;
 
 contract MedicineEscrow {
+    // Custom errors
+    error ZeroEscrowAmount();
+    error TransactionAlreadyExists();
+    error UnauthorizedRelease();
+    error TransactionAlreadyCompleted();
+    error NoFundsInEscrow();
+    error InvalidOneTimeCode();
+    error PaymentFailed();
+
     // Struct to store details of each transaction
     struct Transaction {
         address payable buyer;
@@ -36,13 +45,10 @@ contract MedicineEscrow {
         address payable _seller,
         uint256 _medicineId
     ) external payable {
-        require(msg.value > 0, "Escrow amount must be greater than 0");
+        if (msg.value == 0) revert ZeroEscrowAmount();
 
         bytes32 transactionId = keccak256(abi.encodePacked(_transactionId));
-        require(
-            transactions[transactionId].buyer == address(0),
-            "Transaction ID already exists"
-        );
+        if (transactions[transactionId].buyer != address(0)) revert TransactionAlreadyExists();
 
         uint32 oneTimeCode = generateOneTimeCode();
 
@@ -72,23 +78,17 @@ contract MedicineEscrow {
         bytes32 transactionId = keccak256(abi.encodePacked(_transactionId));
         Transaction storage transaction = transactions[transactionId];
 
-        require(
-            transaction.buyer == msg.sender,
-            "Only the buyer can release the payment"
-        );
-        require(!transaction.isCompleted, "Transaction already completed");
-        require(transaction.amount > 0, "No funds in escrow");
-        require(
-            providedOneTimeCode == transaction.oneTimeCode,
-            "Invalid one-time code"
-        );
+        if (transaction.buyer != msg.sender) revert UnauthorizedRelease();
+        if (transaction.isCompleted) revert TransactionAlreadyCompleted();
+        if (transaction.amount == 0) revert NoFundsInEscrow();
+        if (providedOneTimeCode != transaction.oneTimeCode) revert InvalidOneTimeCode();
 
         transaction.isCompleted = true;
         uint256 amount = transaction.amount;
         transaction.amount = 0;
 
         (bool success, ) = transaction.seller.call{value: amount}("");
-        require(success, "Failed to send payment to seller");
+        if (!success) revert PaymentFailed();
 
         emit PaymentReleased(
             transactionId,
