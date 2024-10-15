@@ -1,56 +1,108 @@
-# PHARMAX
+# PHARMAX Contract
 
-PharmaaX is a decentralized onchain Pharmacy Store application (Dapp) that allows users to browse, purchase, and manage prescription and over-the-counter (OTC) medications using blockchain technology. It ensures transparency in drug sourcing, secures customer transactions via smart contracts, and leverages decentralized storage to protect medical records. This solution provides a decentralized alternative to traditional online pharmacy stores, ensuring security, traceability, and privacy for consumers.
+PharmaaX is a decentralized onchain Pharmacy Store application (Dapp) that allows users to browse, purchase, and manage prescription and over-the-counter (OTC) medications using blockchain technology. This project implements smart contracts for managing prescriptions, user registrations (patients, pharmacies, doctors), and dispute resolutions.
+
+## Table of Contents
+
+- [Features](#features)
+- [Technology](#technology)
+- [Contracts](#contracts)
+- [Contract Deployment Links](#contract-Deployment-Links)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+
 
 
 ## Features
 
-**1. Decentralized Medicine Marketplace**
-**2. Prescription Management**
-**3. Secure Payments and Escrow System**
-**4. Product Authentication and Supply Chain Tracking**
-**5. User Profiles and Medical History Management**
-**6. Doctor and Pharmacist Integration**
+- Prescription Management: This allows doctors to create and validate prescriptions for patients.
+- User Management: Supports registration and management of patient, pharmacy, and doctor profiles.
+- Role Verification: Admin can verify user roles for enhanced security.
+- Error Handling: Custom errors for efficient gas usage and better debugging.
+- Event Logging: Emits events for critical actions, allowing for easier tracking on the blockchain.
 
 
-## Technology Used
+## Technology
 
-**1. Smart Contract**
-**2. Hardhat**
-**2. WAGMI**
-**3. Lisk Testnet**
-**4. Decentralized Storage**
-**5. Oracle Integration**
-**6. Wallet and Payment Integration**
-**7. Frontend**
-**8. Backend**
+- Smart Contract
+- Hardhat
+- Lisk Testnet
+- Decentralized Storage
+- Oracle Integration
+
+## Contracts
+
+### PrescriptionManagement
+
+- **Structs**:
+  - `Prescription`: Stores prescription details (patient address, doctor address, prescription hash, validation status).
+
+- **Functions**:
+  - `addPrescription(address _patient, string memory _prescriptionHash)`: Allows a doctor to add a prescription for a patient.
+  - `validatePrescription(string memory _prescriptionHash, address _patient)`: Validates a prescription against a patient's record.
+  - `getPrescription(string memory _prescriptionHash, address _patient)`: Retrieves a prescription's details.
+
+### UserManagement
+
+- **Enums**:
+  - `Role`: Defines user roles (None, Customer, Pharmacy, Doctor).
+
+- **Structs**:
+  - `PatientProfile`: Contains patient details.
+  - `PharmacyProfile`: Contains pharmacy details.
+  - `DoctorProfile`: Contains doctor details.
+
+- **Functions**:
+  - `registerPatient`: Registers a new patient profile.
+  - `registerPharmacy`: Registers a new pharmacy profile.
+  - `registerDoctor`: Registers a new doctor profile.
+  - `verifyUser(address _user, Role role)`: Verifies a user's role (only callable by the owner).
+
+### Util
+
+- **Errors**:
+  - Defines common errors related to disputes for better gas optimization.
+
+- **Events**:
+  - Logs dispute-related actions (raising and resolving disputes).
 
 
-## Deployment Links
+## Contract Deployment Links
 
-**1. FrontEnd Link** : https://pharmaax.vercel.app/
-**2. MedicineMarketPlace**
-**3. PrescriptionManagement**
-**4. UserManagement**
+- MedicineMarketPlace :
+- PrescriptionManagement :
+- UserManagement: 
 
-## Contract Addresses
-**1. MedicineMarketPlace**
-**2. PrescriptionManagement**
-**3. UserManagement**
+
+## Usage
+
+To deploy the contracts on a Lisk Testnet, use the following command:
+
+```bash
+npx hardhat ignition deploy ./ignition/modules/<script_name>.ts --network lisk-sepolia
+```
+
+### Interacting with the Contracts
+
+You can interact with the contracts using a frontend application (https://pharmaax.vercel.app/) or directly via Blockscout.
+
 
 ## Testing
 
-## Authors
-Samson Aderonmu - https://github.com/Superior212
-Saheed olayiwola - https://github.com/LayintonDev
-Agbakwuru Oluchi - https://github.com/oluchicharity
-Victor Anyimukwu -  https://github.com/udodinho
-Ozavize Akande -  https://github.com/ozavcodez
-Anuoluwapo Shaleye -
-Jeremiah D Samuel - https://github.com/livinalt
-Sunday Solomon - https://github.com/Nomolos29
-Similoluwa Abidoye - https://github.com/Abidoyesimze
-  
+Unit tests are were performed to check features functionality. To run tests, use
+
+```bash
+npx hardhat test
+```
+
 
 ## License
 Distributed under the MIT License.
+
+
+
+
+
