@@ -6,4 +6,5 @@ interface IUserManagement {
 
     function getRole(address _user) external view returns (Role);
     function isDoctorVerified(address _doctor) external view returns (bool);
+    function isPharmacyVerified(address _pharmacy) external view returns (bool);
 }
