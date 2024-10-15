@@ -1,11 +1,3 @@
-'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Bell } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
-
 
 
 type Transaction = {
@@ -66,11 +58,7 @@ type Transaction = {
   };
   
 
-const Consultations: React.FC = () => {
-
-  const [activeTab, setActiveTab] = useState('/consultation');
-
-  
+const Consultations: React.FC = () => {  
 
   return (
     <div className="w-full">
@@ -78,7 +66,6 @@ const Consultations: React.FC = () => {
       {/* Content area */}
       
       <div className="w-full max-w-7xl overflow-x-auto">
-      {activeTab === '/consultation' && (
         <table className="min-w-full bg-white">
           <thead>
             <tr>
@@ -107,7 +94,6 @@ const Consultations: React.FC = () => {
             ))}
           </tbody>
         </table>
-        )}
       </div>
         
     </div>
@@ -115,3 +101,22 @@ const Consultations: React.FC = () => {
 };
 
 export default Consultations;
+
+// {activeTab === '/wallet' && (
+//   <div>
+//     <h2 className="text-xl font-semibold mb-4">Wallet & Transactions</h2>
+//     <p>Your wallet and transaction details will be displayed here.</p>
+//   </div>
+// )}
+// {activeTab === '/appointments' && (
+//   <div>
+//     <h2 className="text-xl font-semibold mb-4">My Appointments</h2>
+//     <p>Your upcoming and past appointments will be listed here.</p>
+//   </div>
+// )}
+// {activeTab === '/purchases' && (
+//   <div>
+//     <h2 className="text-xl font-semibold mb-4">Product Purchases</h2>
+//     <p>Your product purchase history and details will be shown here.</p>
+//   </div>
+// )}
