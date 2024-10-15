@@ -27,13 +27,22 @@ contract MedicineMarketPlace {
     event MedicationAvailabilityUpdated(uint256 indexed id, bool isAvailable);
     event MedicationPurchased(uint256 indexed id, address buyer, uint256 quantityBought, uint256 totalPrice);
 
+    error NotOwner();
+    error NotAdmin();
+    error InsufficientStock();
+    error IncorrectPaymentAmount();
+    error MedicationExpired();
+    error MedicationNotListed();
+    error MedicationNotAvailable();
+    error InvalidStock();
+
     modifier onlyOwner(uint256 _medicationId) {
-        require(medications[_medicationId].owner == msg.sender, "Not the owner");
+        if (medications[_medicationId].owner != msg.sender) revert NotOwner();
         _;
     }
 
     modifier onlyAdmin() {
-        require(msg.sender == platformAdmin, "Not the admin");
+        if (msg.sender != platformAdmin) revert NotAdmin();
         _;
     }
 
@@ -50,7 +59,7 @@ contract MedicineMarketPlace {
         uint256 _expiryDate, 
         bool _isPrescriptionRequired
     ) external {
-        require(_stockQuantity > 0, "Stock must be greater than zero");
+        if (_stockQuantity <= 0) revert InvalidStock();
 
         medications[nextMedicationId] = Medication({
             id: nextMedicationId,
@@ -73,14 +82,13 @@ contract MedicineMarketPlace {
     function purchaseMedication(uint256 _medicationId, uint256 _quantityBought) external payable {
         Medication storage med = medications[_medicationId];
 
-        require(med.isListed, "Medication is not listed");
-        require(med.isAvailable, "Medication is not available");
-        require(med.stockQuantity >= _quantityBought, "Insufficient stock");
-        require(med.expiryDate > block.timestamp, "Medication expired");
+        if (!med.isListed) revert MedicationNotListed();
+        if (!med.isAvailable) revert MedicationNotAvailable();
+        if (med.stockQuantity < _quantityBought) revert InsufficientStock();
+        if (med.expiryDate <= block.timestamp) revert MedicationExpired();
 
         uint256 totalPrice = med.pricePerUnit * _quantityBought;
-
-        require(msg.value == totalPrice, "Incorrect payment amount");
+        if (msg.value != totalPrice) revert IncorrectPaymentAmount();
 
         med.stockQuantity -= _quantityBought;
 
