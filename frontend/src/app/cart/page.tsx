@@ -2,8 +2,8 @@ import CartContent from '@/components/Cart/CartContent'
 
 const page = () => {
   return (
-    <main className='pt-[1.68rem]'>
-  <CartContent/>
+    <main className='w-full'>
+      <CartContent/>
     </main>
   )
 }

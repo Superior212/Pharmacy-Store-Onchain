@@ -37,9 +37,9 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <NavLink href="/">About</NavLink>
-              <NavLink href="/about">Stores</NavLink>
+            <div className="ml-10 flex justify-between items-center gap-4">
+              <NavLink href="/medications">All Products</NavLink>
+              <NavLink href="/stores">Stores</NavLink>
               <Button className="bg-[#FFD700] hover:bg-[#FFD700] rounded-2xl">
                 Connect
               </Button>
