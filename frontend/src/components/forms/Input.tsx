@@ -4,7 +4,7 @@ interface InputProps  {
   // errorMessage?: string
   // label?: string
   placeholder?: string
-  validationProps:any
+  validationProps:object
   className?: string
   children?: React.ReactNode
 }

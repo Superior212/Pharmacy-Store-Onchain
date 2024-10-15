@@ -1,9 +1,8 @@
-import { useState } from "react";
 // import { CiUser } from "react-icons/ci";
-import { useForm } from "react-hook-form";
-import CustomInput from "./Input";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import CustomInput from "./Input";
 
 
 const Patient = () => {
