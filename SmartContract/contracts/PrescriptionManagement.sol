@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/IUserManagement.sol";
@@ -25,6 +25,7 @@ contract PrescriptionManagement is Ownable {
     event PrescriptionUsed(address indexed patient, string prescription);
 
     error DoctorNotVerified();
+    error PharmacyNotVerified();
     error InvalidPrescription();
     error AddressZeroDetected();
     error NotAuthorizedDoctor();
@@ -82,6 +83,8 @@ contract PrescriptionManagement is Ownable {
         if (role != IUserManagement.Role.Pharmacy) {
             revert NoAccessToPrescription();
         }
+
+        if (!userManagement.isPharmacyVerified(_pharmacy)) revert PharmacyNotVerified();
 
         pharmacyAccess[msg.sender][_pharmacy] = true;
 
