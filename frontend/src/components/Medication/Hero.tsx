@@ -1,5 +1,5 @@
 import { FaAngleRight } from "react-icons/fa6";
-import { Button } from '../ui/button'
+import { Button } from '../ui/button';
 
 const Hero = () => {
   return (

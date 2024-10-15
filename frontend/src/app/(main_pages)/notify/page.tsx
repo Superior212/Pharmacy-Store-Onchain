@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 const tabs = [
     { name: 'General', path: '/third-general' },
     { name: 'Validations', path: '/validation' },
-    { name: 'Notification', path: '/notification' },
+    { name: 'Notification', path: '/notify' },
 ];
 
 const UserProfile: React.FC = () => {
@@ -22,7 +22,7 @@ const UserProfile: React.FC = () => {
        <main className='flex items-center space-x-6'>
        <div className="">
           <Image
-            src="/Ellipse.svg"
+            src="/Ellipse2.svg"
             alt=''
             width={100}
             height={100}
