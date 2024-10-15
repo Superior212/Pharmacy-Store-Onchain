@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Pharmacy Onchain Platform Frontend
 
-First, run the development server:
+This is the frontend for the pharmacy Onchain platform that allows users and prospective patients, Doctors, Pharmacy, and Pharmacists perform a list of actions ranging from browsing and purchase pharmacy products, view care services, book appointments, explore featured pharmacy stores and manage the pharmacy operations and inventory.
+
+## Deployment Link
+
+**1. FrontEnd Link** : https://pharmaax.vercel.app/
+
+## Description
+
+The platform delivers a smooth and responsive user experience, showcasing the core features such as product listings, service quality, and easy accessibility to pharmacies.
+
+## Technologies Used
+
+- **Next.js** (v14.2.15): React framework with server-side rendering.
+- **React** (v18): JavaScript library for building UI.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **Radix UI**: For accessible components like checkboxes, selects.
+- **Lucide Icons**: Icon library.
+- **TypeScript**: For typed JavaScript.
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Superior212/Pharmacy-Store-Onchain/tree/main/frontend.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Pharmacy-Store-Onchain
+   cd Frontend
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+## Available Scripts
+
+In the project directory, you can run:
+
+- **`npm run dev`**: Runs the app in development mode.
+- **`npm run build`**: Builds the app for production.
+- **`npm run start`**: Starts the production server.
+
+## Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+├── components
+│   ├── Home
+│   │   ├── Care-services.tsx
+│   │   ├── Commitment-to-quality.tsx
+│   │   ├── Feature-list.tsx
+│   │   ├── Featured-products.tsx
+│   │   ├── Featured-stores.tsx
+│   │   ├── Hero.tsx
+├── pages
+│   ├── index.tsx
+├── public
+│   ├── images
+├── styles
+│   ├── globals.css
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to Run
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Start the development server:
+   ```bash
+   npm run dev
+   ```
+2. Open `http://localhost:3000` to view the app.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+We welcome every contributions. Simply pull request for any issues or improvements you may have observed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.

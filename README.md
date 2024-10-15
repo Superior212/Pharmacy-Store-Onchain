@@ -49,6 +49,7 @@ Doctors can write and upload prescriptions directly to the PharmaaX platform and
 **3. UserManagement**
 
 ## Testing
+The smart contracts were tested using Hardhat for unit testing and integration tests to ensure proper functionality. The tests include payment processing, prescription validation, escrow services, and user profile management. Detailed test results and documentation are available in the tests folder.
 
 ## Authors
 Samson Aderonmu - https://github.com/Superior212
@@ -56,11 +57,14 @@ Saheed olayiwola - https://github.com/LayintonDev
 Agbakwuru Oluchi - https://github.com/oluchicharity
 Victor Anyimukwu -  https://github.com/udodinho
 Ozavize Akande -  https://github.com/ozavcodez
-Anuoluwapo Shaleye -
+Anuoluwapo Shaleye - https://github.com/Bukola-tech
 Jeremiah D Samuel - https://github.com/livinalt
 Sunday Solomon - https://github.com/Nomolos29
 Similoluwa Abidoye - https://github.com/Abidoyesimze
   
+## UI Design/Prototype Link
+[**Pharmaax UI Figma Link**](https://www.figma.com/proto/WOBt683rj1vOYI1Ry7npY6/pharmaX-out?page-id=0%3A1&node-id=285-873&node-type=frame&viewport=-2390%2C819%2C0.23&t=t3jRr4tjj9SbQcMm-1&scaling=scale-down-width&content-scaling=fixed)
+
 
 ## License
 Distributed under the MIT License.
