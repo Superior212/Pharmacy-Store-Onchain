@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Logo from "../../../public/Logo.svg"
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Logo from "../../../public/Logo.svg";
+import { YourApp } from "./ConnectButton";
 
 const NavLink = ({
   href,
@@ -30,16 +31,20 @@ export default function Navbar() {
         <div className="flex items-center w-full justify-between h-20">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-               <Image src={Logo} alt="Logo" className="h-18 w-18" />
+              {/* <span className="text-2xl font-bold text-gray-900">Logo</span>
+               */}
+              <Image src={Logo} alt="Logo" className="h-18 w-18" />
+              {/* <MemoLogo className="sm:h-32 sm:w-40 h-28 w-28" /> */}
             </Link>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex justify-between items-center gap-4">
               <NavLink href="/medications">All Products</NavLink>
               <NavLink href="/stores">Stores</NavLink>
-              <Button className="bg-[#FFD700] hover:bg-[#FFD700] rounded-2xl">
-                Connect
-              </Button>
+              {/* <div className="bg-[#FFD700] hover:bg-[#FFD700] rounded-2xl">
+                
+              </div> */}
+              <YourApp/>
             </div>
           </div>
           <div className="md:hidden">
