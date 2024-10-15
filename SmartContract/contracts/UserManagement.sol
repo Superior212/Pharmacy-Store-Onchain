@@ -8,11 +8,11 @@ contract UserManagement is Ownable {
     error NotPharmacy();
     error InvalidRole();
     error NotRegistered();
-    error AlreadyRegistered();
     error AlreadyHasRole();
+    error AlreadyRegistered();
     error AddressZeroDetected();
 
-    enum Role { None, Customer, Pharmacy, Doctor }
+    enum Role { None, Patient, Pharmacy, Doctor }
 
     struct PatientProfile {
         string firstName;
@@ -27,7 +27,6 @@ contract UserManagement is Ownable {
         uint32 businessNumber;
         string pharmacyOwnerName;
         string storeLocation;
-        string clinicName;
         string businessNumberCertificateHash;
         string licenseNumberCertificateHash;
         bool isRegistered;
@@ -40,13 +39,13 @@ contract UserManagement is Ownable {
         string about;
         uint32 yearsOfExperience;
         string clinicName;
-        uint32 licenseNumber;
+        string licenseNumber;
         string medicalCertificateHash;
         bool isRegistered;
         bool isVerified;
     }
 
-    mapping(address => PatientProfile) private customerProfiles;
+    mapping(address => PatientProfile) private patientProfiles;
     mapping(address => PharmacyProfile) private pharmacyProfiles;
     mapping(address => DoctorProfile) private doctorProfiles;
     mapping(address => Role) private userRoles;
@@ -77,16 +76,16 @@ contract UserManagement is Ownable {
         _checkAddress(); 
         _checkRole();
 
-        if (customerProfiles[msg.sender].isRegistered) {
+        if (patientProfiles[msg.sender].isRegistered) {
             revert AlreadyRegistered();
         }
 
-        customerProfiles[msg.sender] = PatientProfile(
+        patientProfiles[msg.sender] = PatientProfile(
             _firstName, _lastName, _dob, _healthInfo, true
         );
-        userRoles[msg.sender] = Role.Customer;
+        userRoles[msg.sender] = Role.Patient;
 
-        emit UserRegistered(msg.sender, Role.Customer);
+        emit UserRegistered(msg.sender, Role.Patient);
     }
 
     function registerPharmacy(
@@ -94,7 +93,6 @@ contract UserManagement is Ownable {
         uint32 _businessNumber,
         string memory _pharmacyOwnerName,
         string memory _storeLocation,
-        string memory _clinicName,
         string memory _businessNumberCertificateHash,
         string memory _licenseNumberCertificateHash
     ) public {
@@ -107,7 +105,7 @@ contract UserManagement is Ownable {
 
         pharmacyProfiles[msg.sender] = PharmacyProfile(
             _storeName, _businessNumber, _pharmacyOwnerName,
-            _storeLocation, _clinicName, _businessNumberCertificateHash, _licenseNumberCertificateHash, true, false
+            _storeLocation, _businessNumberCertificateHash, _licenseNumberCertificateHash, true, false
         );
 
         userRoles[msg.sender] = Role.Pharmacy;
@@ -121,7 +119,7 @@ contract UserManagement is Ownable {
         string memory _about,
         uint32 _yearsOfExperience,
         string memory _clinicName,
-        uint32 _licenseNumber,
+        string memory _licenseNumber,
         string memory _medicalCertificateHash
     ) public {
         _checkAddress();
@@ -145,10 +143,10 @@ contract UserManagement is Ownable {
         return userRoles[_user];
     }
 
-    function getCustomerProfile(address _user) public view
+    function getPatientProfile(address _user) public view
         returns (string memory, string memory, string memory, string memory)
     {
-        PatientProfile memory profile = customerProfiles[_user];
+        PatientProfile memory profile = patientProfiles[_user];
         if (!profile.isRegistered) revert NotRegistered();
 
         return (
@@ -161,7 +159,7 @@ contract UserManagement is Ownable {
 
     function getPharmacyProfile(address _user) public view
         returns ( string memory, uint32, string memory, string memory, 
-                string memory, string memory, string memory, bool, bool
+                string memory, string memory, bool, bool
         )
     {
         PharmacyProfile memory profile = pharmacyProfiles[_user];
@@ -172,7 +170,6 @@ contract UserManagement is Ownable {
             profile.businessNumber,
             profile.pharmacyOwnerName,
             profile.storeLocation,
-            profile.clinicName,
             profile.businessNumberCertificateHash,
             profile.licenseNumberCertificateHash,
             profile.isRegistered,
@@ -182,7 +179,7 @@ contract UserManagement is Ownable {
 
     function getDoctorProfile(address _user) public view returns (
             string memory, string memory, string memory, uint32,
-            string memory, uint32, string memory, bool, bool
+            string memory, string memory, string memory, bool, bool
         )
     {
         DoctorProfile memory profile = doctorProfiles[_user];
