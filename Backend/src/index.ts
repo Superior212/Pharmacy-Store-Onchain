@@ -4,6 +4,7 @@ import cors from 'cors';
 import { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv'; 
 import DrugRouter from './Routers/DrugRouter';
+import LicenseRouter from './Routers/LicenseRouter';
 dotenv.config();
 
 
@@ -13,6 +14,7 @@ const port = process.env.PORT || 4040;
 app.use(cors());
 app.use(express.json());
 app.use('/api', DrugRouter);
+app.use('/api', LicenseRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to PharmX');
