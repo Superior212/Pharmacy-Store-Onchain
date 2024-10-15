@@ -6,7 +6,9 @@
     "start": "node build/index.js",
     "dev": "concurrently \"npm run watch\" \"npm run start\"",
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "seed": "tsc && node build/Licenses.js"
+
   },
   "keywords": [],
   "author": "",
