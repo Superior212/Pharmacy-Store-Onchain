@@ -60,6 +60,7 @@ contract CombinedMedicineMarketplace {
     mapping(bytes32 => Transaction) public transactions;
     mapping(uint256 => Dispute) public disputes;
     mapping(uint256 => bytes32) public medicationToEscrow;
+    mapping(bytes32 => uint256) public escrowToOneTimeCode;
 
     event MedicationCreated(
         uint256 indexed id,
@@ -81,7 +82,8 @@ contract CombinedMedicineMarketplace {
         address buyer,
         address seller,
         uint256 amount,
-        uint256 medicineId
+        uint256 medicineId,
+        uint256 oneTimeCode
     );
     event PaymentReleased(
         bytes32 transactionId,
@@ -96,7 +98,6 @@ contract CombinedMedicineMarketplace {
     );
     event DisputeResolved(uint256 indexed medicineId, bool approvedForCustomer);
     event PlatformFeeUpdated(uint256 newFeePercent);
-    event OneTimeCodeGenerated(string transactionId, uint256 oneTimeCode);
     event PurchaseEscrowCreated(
         uint256 indexed medicationId,
         bytes32 escrowId,
@@ -215,7 +216,7 @@ contract CombinedMedicineMarketplace {
         if (transactions[escrowId].buyer != address(0))
             revert TransactionAlreadyExists();
 
-        uint256 oneTimeCode = generateOneTimeCode(_transactionId);
+        uint256 oneTimeCode = generateOneTimeCode();
 
         transactions[escrowId] = Transaction({
             buyer: payable(msg.sender),
@@ -227,9 +228,17 @@ contract CombinedMedicineMarketplace {
             isCodeGenerated: true
         });
 
-        emit EscrowCreated(escrowId, msg.sender, _seller, _amount, _medicineId);
+        // Store the one-time code separately
+        escrowToOneTimeCode[escrowId] = oneTimeCode;
 
-        emit OneTimeCodeGenerated(_transactionId, oneTimeCode);
+        emit EscrowCreated(
+            escrowId,
+            msg.sender,
+            _seller,
+            _amount,
+            _medicineId,
+            oneTimeCode
+        );
 
         return escrowId;
     }
@@ -244,7 +253,7 @@ contract CombinedMedicineMarketplace {
         if (transaction.buyer != msg.sender) revert UnauthorizedRelease();
         if (transaction.isCompleted) revert TransactionAlreadyCompleted();
         if (transaction.amount == 0) revert NoFundsInEscrow();
-        if (providedOneTimeCode != transaction.oneTimeCode)
+        if (providedOneTimeCode != escrowToOneTimeCode[escrowId])
             revert InvalidOneTimeCode();
 
         transaction.isCompleted = true;
@@ -378,19 +387,16 @@ contract CombinedMedicineMarketplace {
         );
     }
 
-    function generateOneTimeCode(
-        string memory _transactionId
-    ) internal view returns (uint256) {
+    function generateOneTimeCode() internal view returns (uint256) {
         uint256 randomNumber = uint256(
             keccak256(
-                abi.encodePacked(
-                    block.timestamp,
-                    block.prevrandao,
-                    msg.sender,
-                    _transactionId
-                )
+                abi.encodePacked(block.timestamp, block.prevrandao, msg.sender)
             )
         );
-        return (randomNumber % 900000) + 100000; // 6-digit number between 100000 and 999999
+        return (randomNumber % 900000) + 100000;
+    }
+
+    function getOneTimeCode(bytes32 escrowId) external view returns (uint256) {
+        return escrowToOneTimeCode[escrowId];
     }
 }
