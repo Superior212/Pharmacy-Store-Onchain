@@ -6,7 +6,7 @@ import { Bell } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-const page = () => {
+const UserProfile = () => {
 
   const [tabPage, setTabPage] = useState("General")
 
@@ -18,7 +18,7 @@ const page = () => {
 
   const active = "bg-[#1364FF] text-gray-100 bg-blue-600 transition-colors";
 
-  let averageStarRating = 4;
+  const averageStarRating = 4;
 
   const button = "w-[120px] h-[40px] rounded-full border-blue-600 border-[1px] text-blue-600 bg-transparent hover:bg-blue-600 hover:text-white transition-colors";
 
@@ -80,4 +80,4 @@ const page = () => {
   )
 }
 
-export default page
+export default UserProfile
