@@ -1,9 +1,11 @@
-import React from 'react'
+import { CallToAction, Hero, WhatToExpect } from "@/components/meet-a-doctor"
 
 const MeetADoctor = () => {
   return (
-    <div>
-      MeetADoctor
+    <div className="w-full">
+      <Hero />
+      <WhatToExpect />
+      <CallToAction />
     </div>
   )
 }
