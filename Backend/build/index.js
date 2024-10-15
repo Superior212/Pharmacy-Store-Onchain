@@ -8,12 +8,14 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const DrugRouter_1 = __importDefault(require("./Routers/DrugRouter"));
+const LicenseRouter_1 = __importDefault(require("./Routers/LicenseRouter"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4040;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use('/api', DrugRouter_1.default);
+app.use('/api', LicenseRouter_1.default);
 app.get('/', (req, res) => {
     res.send('Welcome to PharmX');
 });

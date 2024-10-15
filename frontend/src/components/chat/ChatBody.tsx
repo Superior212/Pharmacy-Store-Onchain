@@ -86,13 +86,13 @@ const ChatBody: React.FC = () => {
                 <div className="absolute inset-0 flex items-center">
                     <div className="w-3/4 mx-auto border-t border-[#EEEEEE]"></div>
                 </div>
-                <span className="relative bg-white px-4 text-[#00000073] font-medium">Today</span>
+                <span className="relative bg-white px-4 rounded-full text-[#00000073] font-medium">Today</span>
             </div>
 
             {/* Chat Messages */}
             <div className="flex-1 p-4  overflow-y-auto">
                 {messages.map((message, index) => (
-                    <div key={index} className={`flex ${message.sender === 'patient' ? 'justify-end' : ''}`}>
+                    <div key={index} className={`flex my-4 ${message.sender === 'patient' ? 'justify-end' : ''}`}>
                         {message.sender === 'doctor' && (
                             <Image
                                 width={20}

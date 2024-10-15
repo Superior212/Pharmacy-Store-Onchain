@@ -12,33 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMedication = exports.updateAvailability = exports.updateMedication = exports.getMedication = exports.unlistMedication = exports.listMedications = exports.createMedication = void 0;
+exports.deleteMedication = exports.updateDrugAvailability = exports.updateMedication = exports.getMedication = exports.unlistMedication = exports.uploadMedication = void 0;
 const DrugModel_1 = __importDefault(require("../Models/DrugModel"));
-const createMedication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const uploadMedication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, category, imageUrl } = req.body;
-        const medication = new DrugModel_1.default({ name, category, imageUrl });
+        const { productName, category, brandName, drugType, isPrescriptionRequired, price, expiryDate, description, medicationImageUrl, quantityInStock } = req.body;
+        const medication = new DrugModel_1.default({
+            productName, category, brandName, drugType, isPrescriptionRequired,
+            price, expiryDate, description, medicationImageUrl, quantityInStock
+        });
         const savedMedication = yield medication.save();
-        res.status(201).json({ message: 'Medication created successfully', medication: savedMedication });
+        res.status(201).json({ message: 'Medication uploaded successfully', medication: savedMedication });
     }
     catch (error) {
         res.status(500).json({ message: 'Error creating medication', error });
     }
 });
-exports.createMedication = createMedication;
-const listMedications = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const medications = yield DrugModel_1.default.find({ isListed: true, isAvailable: true });
-        res.status(200).json(medications);
-    }
-    catch (error) {
-        res.status(500).json({ message: 'Error retrieving medications', error });
-    }
-});
-exports.listMedications = listMedications;
+exports.uploadMedication = uploadMedication;
 const unlistMedication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const medication = yield DrugModel_1.default.findByIdAndUpdate(req.params.id, { isListed: false }, { new: true });
+        const medication = yield DrugModel_1.default.findByIdAndUpdate(req.params.id, { isListed: false, isAvailable: false }, { new: true });
         if (!medication) {
             res.status(404).json({ message: 'Medication not found' });
         }
@@ -47,7 +40,7 @@ const unlistMedication = (req, res) => __awaiter(void 0, void 0, void 0, functio
         }
     }
     catch (error) {
-        res.status(500).json({ message: 'Error unlisting medication', error });
+        res.status(500).json({ message: 'Error unlisting this medication', error });
     }
 });
 exports.unlistMedication = unlistMedication;
@@ -68,8 +61,8 @@ const getMedication = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.getMedication = getMedication;
 const updateMedication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, category, imageUrl } = req.body;
-        const medication = yield DrugModel_1.default.findByIdAndUpdate(req.params.id, { name, category, imageUrl }, { new: true });
+        const { productName, category, brandName, drugType, price, expiryDate, description, medicationImageUrl, quantityInStock } = req.body;
+        const medication = yield DrugModel_1.default.findByIdAndUpdate(req.params.id, { productName, category, brandName, drugType, price, expiryDate, description, medicationImageUrl, quantityInStock }, { new: true, runValidators: true });
         if (!medication) {
             res.status(404).json({ message: 'Medication not found' });
         }
@@ -82,7 +75,7 @@ const updateMedication = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.updateMedication = updateMedication;
-const updateAvailability = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateDrugAvailability = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { isAvailable } = req.body;
         const medication = yield DrugModel_1.default.findByIdAndUpdate(req.params.id, { isAvailable }, { new: true });
@@ -97,7 +90,7 @@ const updateAvailability = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(500).json({ message: 'Error updating availability', error });
     }
 });
-exports.updateAvailability = updateAvailability;
+exports.updateDrugAvailability = updateDrugAvailability;
 const deleteMedication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const medication = yield DrugModel_1.default.findByIdAndDelete(req.params.id);
@@ -105,7 +98,7 @@ const deleteMedication = (req, res) => __awaiter(void 0, void 0, void 0, functio
             res.status(404).json({ message: 'Medication not found' });
         }
         else {
-            res.status(200).json({ message: 'Medication deleted successfully' });
+            res.status(200).json({ message: 'Medication deleted successfully', medication });
         }
     }
     catch (error) {
