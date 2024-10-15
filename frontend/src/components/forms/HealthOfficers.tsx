@@ -1,11 +1,8 @@
-import { useState } from "react";
-// import { CiUser } from "react-icons/ci";
-import Input from "./Input";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import CustomInput from "./Input";
+import * as yup from "yup";
 import { Select } from "../ui/select";
+import CustomInput from "./Input";
 
 const HealthOfficers = () => {
   const schema = yup
@@ -111,7 +108,7 @@ const HealthOfficers = () => {
 
       <div>
         <CustomInput
-          validationProps={""}
+          validationProps={{}}
           className="w1/2"
           placeholder="Upload Medical Certificate"
         ></CustomInput>
