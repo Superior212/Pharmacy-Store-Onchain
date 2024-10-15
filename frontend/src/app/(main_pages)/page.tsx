@@ -7,7 +7,7 @@ import Hero from "@/components/Home/Hero";
 
 const page = () => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 w-full">
       <Hero />
       <Feature />
       <CareService />

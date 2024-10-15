@@ -5,8 +5,8 @@ import MemoRecords from "@/icons/Records";
 
 export default function CommitmentToQuality() {
   return (
-    <div className="bg-white my-7 p-6 md:p-12 rounded-3xl">
-      <div className="max-w-3xl mx-auto">
+    <div className="bg-white w-full my-7 p-6 md:p-12 rounded-3xl">
+      <div className="flex justify-center items-center w-full mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="max-w-[40rem]">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
