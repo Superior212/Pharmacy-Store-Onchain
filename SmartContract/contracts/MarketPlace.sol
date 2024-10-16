@@ -23,6 +23,8 @@ contract Marketplace {
 
     struct Medication {
         uint256 id;
+        string brand;
+        string store;
         string productName;
         string category;
         string imageUrl;
@@ -122,6 +124,8 @@ contract Marketplace {
     }
 
     function createMedication(
+        string memory brand,
+        string memory store,
         string memory _productName,
         string memory _category,
         string memory _imageUrl,
@@ -134,6 +138,8 @@ contract Marketplace {
 
         medications[nextMedicationId] = Medication({
             id: nextMedicationId,
+            brand: _brand,
+            store: _store,
             productName: _productName,
             category: _category,
             imageUrl: _imageUrl,

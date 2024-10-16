@@ -4,6 +4,8 @@ pragma solidity ^0.8.24;
 contract MedicineMarketPlace {
     struct Medication {
         uint256 id;
+        string brand;
+        string store;
         string productName;
         string category;
         string imageUrl;
@@ -51,6 +53,8 @@ contract MedicineMarketPlace {
     }
 
     function createMedication(
+        string memory _brand,
+        string memory _store,
         string memory _productName, 
         string memory _category, 
         string memory _imageUrl, 
@@ -63,6 +67,8 @@ contract MedicineMarketPlace {
 
         medications[nextMedicationId] = Medication({
             id: nextMedicationId,
+            brand: _brand,
+            store: _store,
             productName: _productName,
             category: _category,
             imageUrl: _imageUrl,
