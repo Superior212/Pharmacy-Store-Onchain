@@ -3,11 +3,11 @@ import ItemListing from './ItemListing'
 const CartContent = () => {
 
     return (
-        <>
-            <ItemListing  />
+        <div>
             <ItemListing />
             <ItemListing />
-            </>
+            <ItemListing />
+        </div>
 
     )
 }
