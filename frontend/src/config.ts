@@ -1,9 +1,19 @@
-import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { lisk, liskSepolia } from "wagmi/chains";
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import {
+  base,
+  lisk,
+  liskSepolia,
+  sepolia
+} from 'wagmi/chains';
 
 export const config = getDefaultConfig({
-  appName: "PharmaX",
-  projectId: "53254d53b6eb744328cd68c4b4e096cc",
-  chains: [lisk, liskSepolia],
+  appName: 'PharmX',
+  projectId: '69d9220b2a026845ee35aa00f6c4f928',
+  chains: [
+lisk,
+liskSepolia,
+    base,
+    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [sepolia] : []),
+  ],
   ssr: true,
 });
