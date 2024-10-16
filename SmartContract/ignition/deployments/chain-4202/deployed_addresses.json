@@ -1,3 +1,5 @@
 {
-  "MarketModule#Marketplace": "0x8Ee80676854d8d12D563d07210443B9181DfdfcE"
+  "MarketModule#Marketplace": "0x8Ee80676854d8d12D563d07210443B9181DfdfcE",
+  "UserModule#UserManagement": "0x34B5D26FC98f4da8eD68b07F07BEcf3BEA16a9E0",
+  "PrescriptionModule#PrescriptionManagement": "0x82511dB9583299cA75eedAA67251786FAA363544"
 }
