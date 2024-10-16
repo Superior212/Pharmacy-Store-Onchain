@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 export default function FeaturedPharmacyStores() {
   return (
@@ -17,33 +18,34 @@ export default function FeaturedPharmacyStores() {
               suscipit nulla. Nullam vitae sit tempus diam.
             </p>
           </div>
-          <a
-            href="#"
-            className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <Link
+            href="/stores"
+            className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          >
             All Stores
-          </a>
+          </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <StoreCard
+            callToActionLink="stores/1"
+            storeAddress="Store Address"
             imageUrl="/product.svg"
             name="Bryon Medic Stores"
             rating={20}
-            priceEth={0.002}
-            priceUsd={12}
           />
           <StoreCard
+            storeAddress="Store Address"
+            callToActionLink="stores/2"
             imageUrl="/product2.svg"
             name="McFeron Pharma"
             rating={20}
-            priceEth={0.002}
-            priceUsd={12}
           />
           <StoreCard
+            storeAddress="Store Address"
+            callToActionLink="/stores/3"
             imageUrl="/product3.svg"
             name="Zygan Medics"
             rating={20}
-            priceEth={0.002}
-            priceUsd={12}
           />
         </div>
       </div>
@@ -54,17 +56,17 @@ export default function FeaturedPharmacyStores() {
 interface StoreCardProps {
   imageUrl: string;
   name: string;
+  storeAddress: string;
+  callToActionLink: string;
   rating: number;
-  priceEth: number;
-  priceUsd: number;
 }
 
 export function StoreCard({
   imageUrl,
   name,
   rating,
-  priceEth,
-  priceUsd,
+  storeAddress,
+  callToActionLink,
 }: StoreCardProps) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
@@ -78,12 +80,13 @@ export function StoreCard({
           <span className="text-gray-600">{rating}</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-600">
-            {priceEth} ETH / ${priceUsd}
-          </span>
-          <button className="bg-[#1364FF] text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition-colors">
-            Add to Cart
-          </button>
+          <span className="text-sm text-gray-600">{storeAddress}</span>
+          <Link
+            href={callToActionLink}
+            className="bg-[#1364FF] text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition-colors"
+          >
+            View Stores
+          </Link>
         </div>
       </div>
     </div>
