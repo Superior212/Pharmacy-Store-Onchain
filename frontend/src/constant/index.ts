@@ -3,7 +3,7 @@ import userManagementAbi from "../Abi/UserManagement.json";
 import prescriptionAbi from "../Abi/PrescriptionManagement.json";
 
 export const MarketPlaceContract = {
-  address: "0x8Ee80676854d8d12D563d07210443B9181DfdfcE",
+  address: "0xDb5Cee311F23bd0FA7c1f585bb703721e57457C5",
   abi: marketPlaceAbi,
 };
 
