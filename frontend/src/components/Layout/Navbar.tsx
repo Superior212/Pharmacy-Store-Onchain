@@ -6,7 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../public/Logo.svg";
-import { YourApp } from "./ConnectButton";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import CustomConnectButton from "./ConnectButton";
 
 const NavLink = ({
   href,
@@ -44,7 +46,7 @@ export default function Navbar() {
               {/* <div className="bg-[#FFD700] hover:bg-[#FFD700] rounded-2xl">
                 
               </div> */}
-              <YourApp/>
+              <CustomConnectButton />
             </div>
           </div>
           <div className="md:hidden">
