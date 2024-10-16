@@ -61,6 +61,7 @@ contract Marketplace {
     mapping(uint256 => Dispute) public disputes;
     mapping(uint256 => bytes32) public medicationToEscrow;
     mapping(bytes32 => uint256) public escrowToOneTimeCode;
+    uint256[] public allMedications;
 
     event MedicationCreated(
         uint256 indexed id,
@@ -144,6 +145,8 @@ contract Marketplace {
             owner: msg.sender,
             isPrescriptionRequired: _isPrescriptionRequired
         });
+
+        allMedications.push(nextMedicationId);
 
         emit MedicationCreated(
             nextMedicationId,
@@ -398,5 +401,9 @@ contract Marketplace {
 
     function getOneTimeCode(bytes32 escrowId) external view returns (uint256) {
         return escrowToOneTimeCode[escrowId];
+    }
+
+    function getMedications() public view returns(uint256[] memory) {
+        return allMedications;
     }
 }
