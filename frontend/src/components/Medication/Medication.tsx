@@ -6,6 +6,17 @@ import ProductListing from "./ProductListing";
 
 
 const Medication = () => {
+  const medicationId = 3;
+
+  console.log("Medication ID:", medicationId);
+  const { data: medicationDetails } = useReadContract({
+    abi: MarketplaceAbi,
+    address: MarketPlaceContract.address as `0x${string}`,
+    functionName: "getMedicationDetails",
+    args: [medicationId],
+  });
+  console.log("Medication Details:", medicationDetails);
+
   const [searchText, setSearchText] = useState("");
   return (
     <main className="w-full mx-auto pt-4">
