@@ -1,4 +1,4 @@
-import Store from '@/components/store/Store'
+import Store from '@/components/store/Store';
 
 const page = () => {
   return (
