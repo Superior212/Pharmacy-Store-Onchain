@@ -67,6 +67,25 @@
       {
         "indexed": true,
         "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum UserManagement.Role",
+        "name": "role",
+        "type": "uint8"
+      }
+    ],
+    "name": "DoctorRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "previousOwner",
         "type": "address"
       },
@@ -96,7 +115,32 @@
         "type": "uint8"
       }
     ],
-    "name": "UserRegistered",
+    "name": "PatientRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum UserManagement.Role",
+        "name": "role",
+        "type": "uint8"
+      }
+    ],
+    "name": "PharmacyRegistered",
     "type": "event"
   },
   {
@@ -111,6 +155,19 @@
     ],
     "name": "UserVerified",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "getAllPharmacies",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -215,6 +272,11 @@
     ],
     "name": "getPharmacyProfile",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
       {
         "internalType": "string",
         "name": "",
