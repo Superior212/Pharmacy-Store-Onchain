@@ -65,12 +65,11 @@ function ProductCard({
       <div className="relative h-48 md:h-64">
         <Image
           src={imageUrl}
-          className="rounded-3xl"
+          className="rounded-xl h-full w-[22rem] object-cover"
           alt={name}
-          fill
-          objectFit="cover"
+          width={300}
+          height={200}
         />
-        <div className="absolute top-2 right-2 bg-white rounded-full p-2"></div>
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between">
