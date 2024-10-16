@@ -14,7 +14,7 @@ describe("Marketplace", function () {
     describe("Deployment", function () {
         it("Should deploy and initialize the contract correctly", async function () {
             const { marketplace, platformAdmin } = await loadFixture(deployMarketplaceFixture);
-            expect(await marketplace.platformAdmin()).to.equal(platformAdmin); // Added .address for signers
+            expect(await marketplace.platformAdmin()).to.equal(platformAdmin);
         });
     });
 
