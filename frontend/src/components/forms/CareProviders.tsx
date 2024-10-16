@@ -124,7 +124,7 @@ const CareProviders = () => {
           I consent to the terms and conditions
         </label>
 
-        <button type="submit" className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg">Submit</button>
+        <button type="submit" className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg hover:bg-blue-400 transition-colors">Submit</button>
       </div>
       </div>
     </form>

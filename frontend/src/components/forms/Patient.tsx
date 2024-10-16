@@ -75,7 +75,7 @@ const Patient = () => {
 
       <button
         type="submit"
-        className="w-full text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg"
+        className="w-full text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg hover:bg-blue-400 transition-colors"
       >
         Submit
       </button>
