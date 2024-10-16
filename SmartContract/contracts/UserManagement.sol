@@ -28,6 +28,7 @@ contract UserManagement is Ownable {
     }
 
     struct PharmacyProfile {
+        uint256 id;
         string storeName;
         uint32 businessNumber;
         string pharmacyOwnerName;
@@ -54,9 +55,14 @@ contract UserManagement is Ownable {
     mapping(address => PharmacyProfile) private pharmacyProfiles;
     mapping(address => DoctorProfile) private doctorProfiles;
     mapping(address => Role) private userRoles;
+    address[] private pharmacies;
+    uint256 storeCount;
 
-    event UserRegistered(address indexed user, Role role);
+    event PatientRegistered(address indexed user, Role role);
     event UserVerified(address indexed user);
+    event DoctorRegistered(address indexed user, Role role);
+    event PharmacyRegistered(uint256 id, address indexed user, Role role);
+
 
     constructor() Ownable(msg.sender) {}
 
@@ -94,7 +100,7 @@ contract UserManagement is Ownable {
         );
         userRoles[msg.sender] = Role.Patient;
 
-        emit UserRegistered(msg.sender, Role.Patient);
+        emit PatientRegistered(msg.sender, Role.Patient);
     }
 
     function registerPharmacy(
@@ -112,7 +118,10 @@ contract UserManagement is Ownable {
             revert AlreadyRegistered();
         }
 
+        uint256 _id = storeCount + 1;
+
         pharmacyProfiles[msg.sender] = PharmacyProfile(
+            _id,
             _storeName,
             _businessNumber,
             _pharmacyOwnerName,
@@ -123,9 +132,13 @@ contract UserManagement is Ownable {
             false
         );
 
-        userRoles[msg.sender] = Role.Pharmacy;
+        pharmacies.push(msg.sender);
 
-        emit UserRegistered(msg.sender, Role.Pharmacy);
+        userRoles[msg.sender] = Role.Pharmacy;
+        
+        emit PharmacyRegistered(_id, msg.sender, Role.Pharmacy);
+
+        storeCount += 1;
     }
 
     function registerDoctor(
@@ -158,7 +171,7 @@ contract UserManagement is Ownable {
 
         userRoles[msg.sender] = Role.Doctor;
 
-        emit UserRegistered(msg.sender, Role.Doctor);
+        emit DoctorRegistered(msg.sender, Role.Doctor);
     }
 
     function getRole(address _user) public view returns (Role) {
@@ -189,6 +202,7 @@ contract UserManagement is Ownable {
         public
         view
         returns (
+            uint256,
             string memory,
             uint32,
             string memory,
@@ -203,6 +217,7 @@ contract UserManagement is Ownable {
         if (!profile.isRegistered) revert NotRegistered();
 
         return (
+            profile.id,
             profile.storeName,
             profile.businessNumber,
             profile.pharmacyOwnerName,
@@ -270,5 +285,9 @@ contract UserManagement is Ownable {
         } else {
             revert InvalidRole();
         }
+    }
+
+    function getAllPharmacies() public view returns (address[] memory) {
+        return pharmacies;
     }
 }
