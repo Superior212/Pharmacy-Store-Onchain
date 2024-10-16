@@ -27,7 +27,7 @@ contract UserManagement is Ownable {
         uint32 businessNumber;
         string pharmacyOwnerName;
         string storeLocation;
-        string businessNumberCertificateHash;
+        string businessNumberCertificate;
         string licenseNumberCertificateHash;
         bool isRegistered;
         bool isVerified;
@@ -93,7 +93,7 @@ contract UserManagement is Ownable {
         uint32 _businessNumber,
         string memory _pharmacyOwnerName,
         string memory _storeLocation,
-        string memory _businessNumberCertificateHash,
+        string memory _businessNumberCertificate,
         string memory _licenseNumberCertificateHash
     ) public {
         _checkAddress();
@@ -170,7 +170,7 @@ contract UserManagement is Ownable {
             profile.businessNumber,
             profile.pharmacyOwnerName,
             profile.storeLocation,
-            profile.businessNumberCertificateHash,
+            profile.businessNumberCertificate,
             profile.licenseNumberCertificateHash,
             profile.isRegistered,
             profile.isVerified
