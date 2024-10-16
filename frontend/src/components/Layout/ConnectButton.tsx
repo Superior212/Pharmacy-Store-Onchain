@@ -28,7 +28,7 @@ export default function CustomConnectButton() {
             <button
               onClick={openConnectModal}
               type="button"
-              className="bg-[#131313B2] text-white py-2 px-5 rounded-lg">
+              className="bg-[#FFD700] text-[#000000] py-2 px-5 rounded-[2rem]">
               Connect Wallet
             </button>
           );
@@ -49,11 +49,11 @@ export default function CustomConnectButton() {
             style={{
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#131313B2",
+              backgroundColor: "#FFD700",
               border: "none",
               cursor: "pointer",
             }}
-            className="bg-[#131313B2] space-x-2 text-white py-2 px-5 rounded-[2rem]">
+            className="bg-[#FFD700] space-x-2 text-[#000000] py-2 px-5 rounded-[2rem]">
             <p>
               {" "}
               {account.address.slice(0, 6)}...{account.address.slice(-4)}

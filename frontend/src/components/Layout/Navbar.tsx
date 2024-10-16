@@ -6,8 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../public/Logo.svg";
-
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CustomConnectButton from "./ConnectButton";
 
 const NavLink = ({
