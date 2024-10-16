@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+import "./util.sol";
+
 contract DisputeResolution is Util {
     struct Dispute {
         address customer;
@@ -15,15 +17,20 @@ contract DisputeResolution is Util {
     // Modifier to ensure only the customer can raise a dispute
     modifier onlyCustomer(address customer) {
         if (msg.sender != customer) revert UnauthorizedAccess();
+        _;
     }
 
     // Function to raise a dispute by the customer
-    function raiseDispute(uint medicineId, string memory reason) external onlyCustomer(msg.sender) {
+    function raiseDispute(
+        uint medicineId,
+        string memory reason
+    ) external onlyCustomer(msg.sender) {
         // Check if the medicineId is valid (use your own validation for this)
         if (medicineId == 0) revert InvalidMedicineId();
 
         // Ensure a dispute hasn't been raised for this medicine before
-        if (disputes[medicineId].customer != address(0)) revert DisputeAlreadyRaised();
+        if (disputes[medicineId].customer != address(0))
+            revert DisputeAlreadyRaised();
 
         // Create a new dispute
         disputes[medicineId] = Dispute({
@@ -58,10 +65,26 @@ contract DisputeResolution is Util {
     }
 
     // Function to view dispute details
-    function getDispute(uint medicineId) external view returns (address customer, string memory reason, bool resolved, bool approveCustomer) {
+    function getDispute(
+        uint medicineId
+    )
+        external
+        view
+        returns (
+            address customer,
+            string memory reason,
+            bool resolved,
+            bool approveCustomer
+        )
+    {
         Dispute memory dispute = disputes[medicineId];
         if (dispute.customer == address(0)) revert DisputeNotFound();
 
-        return (dispute.customer, dispute.reason, dispute.resolved, dispute.approveCustomer);
+        return (
+            dispute.customer,
+            dispute.reason,
+            dispute.resolved,
+            dispute.approveCustomer
+        );
     }
 }
