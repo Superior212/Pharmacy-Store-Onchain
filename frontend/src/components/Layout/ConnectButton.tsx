@@ -1,6 +1,6 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Image from 'next/image';
-export const YourApp = () => {
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+export default function CustomConnectButton() {
   return (
     <ConnectButton.Custom>
       {({
@@ -12,82 +12,55 @@ export const YourApp = () => {
         authenticationStatus,
         mounted,
       }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
+        const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          (!authenticationStatus || authenticationStatus === "authenticated");
+
+        if (!ready) {
+          return null;
+        }
+
+        if (!connected) {
+          return (
+            <button
+              onClick={openConnectModal}
+              type="button"
+              className="bg-[#131313B2] text-white py-2 px-5 rounded-lg">
+              Connect Wallet
+            </button>
+          );
+        }
+
+        if (chain.unsupported) {
+          return (
+            <button onClick={openChainModal} type="button">
+              Wrong network
+            </button>
+          );
+        }
+
         return (
-          <div
-            {...(!ready && {
-              'aria-hidden': true,
-              'style': {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button className="bg-[#FFD700] hover:bg-[#FFD700] rounded-2xl py-2 px-10" onClick={openConnectModal} type="button">
-                    Connect
-                  </button>
-                );
-              }
-              if (chain.unsupported) {
-                return (
-                  <button onClick={openChainModal} type="button">
-                    Wrong network
-                  </button>
-                );
-              }
-              return (
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button
-                    onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <Image
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button>
-                  <button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ''}
-                  </button>
-                </div>
-              );
-            })()}
-          </div>
+          <button
+            onClick={openAccountModal}
+            type="button"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#131313B2",
+              border: "none",
+              cursor: "pointer",
+            }}
+            className="bg-[#131313B2] space-x-2 text-white py-2 px-5 rounded-[2rem]">
+            <p>
+              {" "}
+              {account.address.slice(0, 6)}...{account.address.slice(-4)}
+            </p>
+          </button>
         );
       }}
     </ConnectButton.Custom>
   );
-};
+}

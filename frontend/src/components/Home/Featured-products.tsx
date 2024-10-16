@@ -67,7 +67,7 @@ function ProductCard({
           src={imageUrl}
           className="rounded-3xl"
           alt={name}
-          layout="fill"
+          fill
           objectFit="cover"
         />
         <div className="absolute top-2 right-2 bg-white rounded-full p-2"></div>

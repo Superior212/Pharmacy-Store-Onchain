@@ -9,7 +9,7 @@ import {
 } from 'wagmi/chains';
 
 export const config = getDefaultConfig({
-  appName: 'RainbowKit demo',
+  appName: 'PharmX',
   projectId: '69d9220b2a026845ee35aa00f6c4f928',
   chains: [
     mainnet,
