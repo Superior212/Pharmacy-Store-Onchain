@@ -1,121 +1,164 @@
-'use client'
-import { MarketPlaceContract } from '@/constant';
-import Image from 'next/image'
-import React from 'react'
-import { useReadContract } from 'wagmi';
-import group from "/public/Group6.png";
-const ProductDetailsCard = ({medicationId}:{medicationId:string}) => {
+"use client";
+import Image from "next/image";
+import { ArrowLeft, Minus, Plus } from "lucide-react";
+import { useState } from "react";
+import { MarketPlaceContract } from "@/constant";
+import { useReadContract } from "wagmi";
+interface MedicationDetails {
+  productName: string;
+  store: string;
+  brand: string;
+  category: string;
+  medicationType: string;
+  isPrescriptionRequired: boolean;
+  price: bigint | undefined;
+  description: string;
+  imageUrl: string;
+  expiryDate: string;
+}
+export default function ProductDetailsCard({
+  medicationId,
+}: {
+  medicationId: string;
+}) {
+  const [quantity, setQuantity] = useState(2);
 
-    console.log("Medication ID:", medicationId);
-    const { data: medicationDetails } = useReadContract({
-      abi: MarketPlaceContract.abi,
-      address: MarketPlaceContract.address as `0x${string}`,
-      functionName: "getMedicationDetails",
-      args: [medicationId],
-    });
-    console.log("Medication Details:", medicationDetails);
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  const { data, isLoading } = useReadContract({
+    abi: MarketPlaceContract.abi,
+    address: MarketPlaceContract.address as `0x${string}`,
+    functionName: "getMedicationDetails",
+    args: [medicationId],
+  });
+
+  if (isLoading) {
+    return <p>Loading medication details...</p>;
+  }
+
+  if (!data) {
+    return <p>No medication details found.</p>;
+  }
+
+  const medicationDetails = data as unknown as MedicationDetails;
+  console.log("Medication Details:", medicationDetails);
+
+  // Helper function to safely display the price
+  const displayPrice = () => {
+    if (medicationDetails.price === undefined) {
+      return "Price not available";
+    }
+    try {
+      return `${medicationDetails.price.toString()} ETH`;
+    } catch (error) {
+      console.error("Error converting price:", error);
+      return "Error displaying price";
+    }
+  };
   return (
-    <div className="mt-20 w-full mx-auto p-4">
-    <div className="flex items-center border-b pb-2 mb-6">
-      <button className="text-gray-600 mr-4 relative">
-        <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="mb-6 flex items-center">
+        <button className="p-2 rounded-full border border-gray-300 mr-4">
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <div>
+          <p className="text-sm text-gray-500">Product Name:</p>
+          <h1 className="text-2xl font-bold">
+            {" "}
+            {medicationDetails.productName}
+          </h1>
         </div>
-      </button>
-      <div>
-        <p className="text-sm text-gray-500">Product Name:</p>
-        <h1 className="text-xl mb-4 font-bold">Acetaminophen Pills</h1>
       </div>
-    </div>
 
-    <div className="flex flex-col md:flex-row gap-8">
-      <div className="md:w-1/2">
-        <div className="relative w-full h-96">
+      <div className="grid md:grid-cols-2 gap-8">
+        <div className="bg-white flex items-center justify-center rounded-lg shadow-md overflow-hidden">
           <Image
-            src={group}
-            alt="Aspirin"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
+            src={medicationDetails.imageUrl}
+            alt="Product Image"
+            width={600}
+            height={600}
+            className="w-96 h-96"
           />
-        </div>
-      </div>
-
-      <div className="md:w-1/2">
-        <h2 className="text-3xl font-bold mb-4">Acetaminophen Pills</h2>
-        <div className="space-y-2 mb-4">
-          <p>
-            <span className="font-semibold">Store:</span>{" "}
-            <span className="text-blue-600">McFeron Pharma</span>{" "}
-          </p>
-          <p>
-            <span className="font-semibold">Brand:</span> GSK
-          </p>
-          <p>
-            <span className="font-semibold">Category:</span> Over The Counter
-            (OTC)
-          </p>
-          <p>
-            <span className="font-semibold">Type:</span> Syrup
-          </p>
-          <p>
-            <span className="font-semibold">Prescription Required:</span> NO
-          </p>
-          <p>
-            <span className="font-semibold">Price:</span> 0.002 ETH (100
-            TABLETS)
-          </p>
-        </div>
-
-        <div className="flex items-center gap-4 mb-4">
-          <span className="font-semibold">Order (qty):</span>
-          <button className="px-2 py-1 border rounded">-</button>
-          <span>2</span>
-          <button className="px-2 py-1 border rounded">+</button>
-        </div>
-
-        <div className="flex gap-4 mb-4">
-          <input
-            type="text"
-            placeholder="Provide Code"
-            className="border outline-none rounded px-2 py-1 flex-grow"
-          />
-          <button className="bg-blue-600 text-white px-4 p-4 py-2 rounded-xl">
-            Add to Cart
-          </button>
         </div>
 
         <div>
-          <h3 className="font-semibold mb-2">Description</h3>
-          <p className="text-sm">
-            Acetaminophen is a widely used over-the-counter medication for
-            relieving mild to moderate pain and reducing fever. It is commonly
-            used to treat headaches, muscle aches, back pain, toothaches,
-            menstrual cramps, arthritis, and the symptoms of colds and flu.
-            This product provides effective relief without irritating the
-            stomach, making it a popular alternative to nonsteroidal
-            anti-inflammatory drugs (NSAIDs). Each tablet contains 500mg of
-            Acetaminophen, offering fast and lasting relief
-          </p>
+          <h2 className="text-3xl font-bold mb-4">
+            {medicationDetails.productName}
+          </h2>
+          <div className="space-y-2 mb-6">
+            <p>
+              <span className="font-semibold">Store:</span>{" "}
+              <span className="text-blue-600">McFeron Pharma</span>
+            </p>
+            <p>
+              <span className="font-semibold">Brand:</span> GSK
+            </p>
+            <p>
+              <span className="font-semibold">Category:</span>{" "}
+              {medicationDetails.category}
+            </p>
+            <p>
+              <span className="font-semibold">Type:</span> Syrup
+            </p>
+            <p>
+              <span className="font-semibold">Prescription Required:</span>{" "}
+              {medicationDetails.isPrescriptionRequired ? "Yes" : "No"}
+            </p>
+            <p>
+              <span className="font-semibold">Price:</span> {displayPrice()} ETH{" "}
+              <span className="text-sm text-gray-500">(100 TABLETS)</span>
+            </p>
+          </div>
+
+          <div className="flex items-center mb-4">
+            <span className="mr-4 font-semibold">Order (Qty):</span>
+            <button
+              className="p-2 rounded-full border border-gray-300"
+              onClick={decreaseQuantity}>
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="mx-4 font-semibold">{quantity}</span>
+            <button
+              className="p-2 rounded-full border border-gray-300"
+              onClick={increaseQuantity}>
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="flex space-x-4 mb-6">
+            <input
+              type="text"
+              placeholder="Provide Code"
+              className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
+            />
+            <button className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+              Add to Cart
+            </button>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-2">Description</h3>
+            <p className="text-gray-600">
+              Acetaminophen is a widely used over-the-counter medication for
+              relieving mild to moderate pain and reducing fever. It is commonly
+              used to treat headaches, muscle aches, back pain, toothaches,
+              menstrual cramps, arthritis, and the symptoms of colds and flu.
+            </p>
+            <p className="mt-4 text-gray-600">
+              This product provides effective relief without irritating the
+              stomach, making it a popular alternative to nonsteroidal
+              anti-inflammatory drugs (NSAIDs). Each tablet contains 500mg of
+              Acetaminophen, offering fast and lasting relief
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-  
-  )
+  );
 }
-
-export default ProductDetailsCard
