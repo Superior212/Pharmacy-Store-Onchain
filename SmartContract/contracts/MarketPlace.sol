@@ -27,6 +27,7 @@ contract Marketplace {
         string store;
         string productName;
         string category;
+        string description;
         string imageUrl;
         uint256 pricePerUnit;
         uint256 stockQuantity;
@@ -128,6 +129,7 @@ contract Marketplace {
         string memory store,
         string memory _productName,
         string memory _category,
+        string memory _description,
         string memory _imageUrl,
         uint256 _pricePerUnit,
         uint256 _stockQuantity,
@@ -142,6 +144,7 @@ contract Marketplace {
             store: _store,
             productName: _productName,
             category: _category,
+            description: _description,
             imageUrl: _imageUrl,
             pricePerUnit: _pricePerUnit,
             stockQuantity: _stockQuantity,
