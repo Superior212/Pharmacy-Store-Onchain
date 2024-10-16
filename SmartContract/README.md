@@ -72,9 +72,11 @@ PharmaaX is a decentralized onchain Pharmacy Store application (Dapp) that allow
 
 ## Contract Deployment Links
 
-- MedicineMarketPlace :
-- PrescriptionManagement :
-- UserManagement: 
+- MedicineMarketPlace : [0xDb5Cee311F23bd0FA7c1f585bb703721e57457C5](https://sepolia-blockscout.lisk.com//address/0xDb5Cee311F23bd0FA7c1f585bb703721e57457C5#code)
+
+- PrescriptionManagement : [0x82511dB9583299cA75eedAA67251786FAA363544](https://sepolia-blockscout.lisk.com/address/0x82511dB9583299cA75eedAA67251786FAA363544#code)
+
+- UserManagement: [0x34B5D26FC98f4da8eD68b07F07BEcf3BEA16a9E0](https://sepolia-blockscout.lisk.com/address/0x34B5D26FC98f4da8eD68b07F07BEcf3BEA16a9E0#code)
 
 
 ## Usage
@@ -87,7 +89,7 @@ npx hardhat ignition deploy ./ignition/modules/<script_name>.ts --network lisk-s
 
 ### Interacting with the Contracts
 
-You can interact with the contracts using a frontend application (https://pharmaax.vercel.app/) or directly via Blockscout.
+You can interact with the contracts using a frontend application (https://pharmaax.vercel.app/) or directly via Blockscout (#contracts).
 
 
 ## Testing
