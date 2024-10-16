@@ -19,8 +19,6 @@ const Medication = () => {
   // });
   // console.log("Medication Details:", medicationDetails);
 
-
-const Medication = () => {
   const [searchText, setSearchText] = useState("");
   return (
     <main className="w-full mx-auto pt-4">
