@@ -5,6 +5,8 @@ import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import { Providers } from "../../provider/providers";
 import "@rainbow-me/rainbowkit/styles.css";
+import ProductProvider from "@/provider/ProductProvider";
+import StoreProvider from "@/provider/StoreProvider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -32,11 +34,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-between min-h-screen`}>
         <Providers>
+          <ProductProvider>
+            <StoreProvider>
           <Navbar />
           <main className="flex container mx-auto justify-center xl:mx-auto xl:w-full px-4">
             {children}
           </main>
           <Footer />
+          </StoreProvider>
+          </ProductProvider>
+          
         </Providers>
       </body>
     </html>

@@ -1,577 +1,371 @@
 [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
   },
   {
-    "inputs": [],
-    "name": "DisputeAlreadyRaised",
-    "type": "error"
+      "inputs": [],
+      "name": "DisputeAlreadyRaised",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "DisputeNotFound",
-    "type": "error"
+      "inputs": [],
+      "name": "DisputeNotFound",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "IncorrectPaymentAmount",
-    "type": "error"
+      "inputs": [],
+      "name": "IncorrectPaymentAmount",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "InsufficientStock",
-    "type": "error"
+      "inputs": [],
+      "name": "InsufficientStock",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "InvalidDisputeResolution",
-    "type": "error"
+      "inputs": [],
+      "name": "InvalidDisputeResolution",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "InvalidMedicineId",
-    "type": "error"
+      "inputs": [],
+      "name": "InvalidMedicineId",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "InvalidOneTimeCode",
-    "type": "error"
+      "inputs": [],
+      "name": "InvalidOneTimeCode",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "MedicationExpired",
-    "type": "error"
+      "inputs": [],
+      "name": "MedicationExpired",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "MedicationNotAvailable",
-    "type": "error"
+      "inputs": [],
+      "name": "MedicationNotAvailable",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "MedicationNotListed",
-    "type": "error"
+      "inputs": [],
+      "name": "MedicationNotListed",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "NoFundsInEscrow",
-    "type": "error"
+      "inputs": [],
+      "name": "NoFundsInEscrow",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "PaymentFailed",
-    "type": "error"
+      "inputs": [],
+      "name": "PaymentFailed",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "TransactionAlreadyCompleted",
-    "type": "error"
+      "inputs": [],
+      "name": "TransactionAlreadyCompleted",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "TransactionAlreadyExists",
-    "type": "error"
+      "inputs": [],
+      "name": "TransactionAlreadyExists",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "UnauthorizedAccess",
-    "type": "error"
+      "inputs": [],
+      "name": "UnauthorizedAccess",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "UnauthorizedRelease",
-    "type": "error"
+      "inputs": [],
+      "name": "UnauthorizedRelease",
+      "type": "error"
   },
   {
-    "inputs": [],
-    "name": "ZeroEscrowAmount",
-    "type": "error"
+      "inputs": [],
+      "name": "ZeroEscrowAmount",
+      "type": "error"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "customer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "reason",
-        "type": "string"
-      }
-    ],
-    "name": "DisputeRaised",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "approvedForCustomer",
-        "type": "bool"
-      }
-    ],
-    "name": "DisputeResolved",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "transactionId",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "seller",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "oneTimeCode",
-        "type": "uint256"
-      }
-    ],
-    "name": "EscrowCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isAvailable",
-        "type": "bool"
-      }
-    ],
-    "name": "MedicationAvailabilityUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "productName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "pricePerUnit",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "stockQuantity",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "MedicationCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isListed",
-        "type": "bool"
-      }
-    ],
-    "name": "MedicationListedStatusUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "quantityBought",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "totalPrice",
-        "type": "uint256"
-      }
-    ],
-    "name": "MedicationPurchased",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "transactionId",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "seller",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "PaymentReleased",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newFeePercent",
-        "type": "uint256"
-      }
-    ],
-    "name": "PlatformFeeUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "medicationId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "escrowId",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "PurchaseEscrowCreated",
-    "type": "event"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_productName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_category",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_imageUrl",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_pricePerUnit",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_stockQuantity",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_expiryDate",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "_isPrescriptionRequired",
-        "type": "bool"
-      }
-    ],
-    "name": "createMedication",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "disputes",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "customer",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "reason",
-        "type": "string"
-      },
-      {
-        "internalType": "bool",
-        "name": "resolved",
-        "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "approveCustomer",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "name": "escrowToOneTimeCode",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getDispute",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "customer",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "reason",
-        "type": "string"
-      },
-      {
-        "internalType": "bool",
-        "name": "resolved",
-        "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "approveCustomer",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_medicationId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getMedicationDetails",
-    "outputs": [
-      {
-        "components": [
+      "anonymous": false,
+      "inputs": [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
           },
           {
-            "internalType": "string",
-            "name": "productName",
-            "type": "string"
+              "indexed": true,
+              "internalType": "address",
+              "name": "customer",
+              "type": "address"
           },
           {
-            "internalType": "string",
-            "name": "category",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "imageUrl",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "pricePerUnit",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "stockQuantity",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isListed",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "isAvailable",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "expiryDate",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "bool",
-            "name": "isPrescriptionRequired",
-            "type": "bool"
+              "indexed": false,
+              "internalType": "string",
+              "name": "reason",
+              "type": "string"
           }
-        ],
-        "internalType": "struct Marketplace.Medication",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      ],
+      "name": "DisputeRaised",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "approvedForCustomer",
+              "type": "bool"
+          }
+      ],
+      "name": "DisputeResolved",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "transactionId",
+              "type": "bytes32"
+          },
+          {
+              "indexed": false,
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "address",
+              "name": "seller",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "oneTimeCode",
+              "type": "uint256"
+          }
+      ],
+      "name": "EscrowCreated",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isAvailable",
+              "type": "bool"
+          }
+      ],
+      "name": "MedicationAvailabilityUpdated",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "string",
+              "name": "productName",
+              "type": "string"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "pricePerUnit",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "stockQuantity",
+              "type": "uint256"
+          },
+          {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+          }
+      ],
+      "name": "MedicationCreated",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "isListed",
+              "type": "bool"
+          }
+      ],
+      "name": "MedicationListedStatusUpdated",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "quantityBought",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "totalPrice",
+              "type": "uint256"
+          }
+      ],
+      "name": "MedicationPurchased",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "transactionId",
+              "type": "bytes32"
+          },
+          {
+              "indexed": false,
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "address",
+              "name": "seller",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+          }
+      ],
+      "name": "PaymentReleased",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newFeePercent",
+              "type": "uint256"
+          }
+      ],
+      "name": "PlatformFeeUpdated",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "medicationId",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "escrowId",
+              "type": "bytes32"
+          },
+          {
+              "indexed": false,
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+          }
+      ],
+      "name": "PurchaseEscrowCreated",
+      "type": "event"
   },
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "escrowId",
-        "type": "bytes32"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "getOneTimeCode",
+    "name": "allMedications",
     "outputs": [
       {
         "internalType": "uint256",
@@ -583,352 +377,590 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_transactionId",
-        "type": "string"
-      }
-    ],
-    "name": "getTransactionDetails",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "seller",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isCompleted",
-        "type": "bool"
-      },
-      {
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isCodeGenerated",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "string",
+              "name": "_productName",
+              "type": "string"
+          },
+          {
+              "internalType": "string",
+              "name": "_category",
+              "type": "string"
+          },
+          {
+              "internalType": "string",
+              "name": "_imageUrl",
+              "type": "string"
+          },
+          {
+              "internalType": "uint256",
+              "name": "_pricePerUnit",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "_stockQuantity",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "_expiryDate",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "_isPrescriptionRequired",
+              "type": "bool"
+          }
+      ],
+      "name": "createMedication",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "medicationToEscrow",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "name": "disputes",
+      "outputs": [
+          {
+              "internalType": "address",
+              "name": "customer",
+              "type": "address"
+          },
+          {
+              "internalType": "string",
+              "name": "reason",
+              "type": "string"
+          },
+          {
+              "internalType": "bool",
+              "name": "resolved",
+              "type": "bool"
+          },
+          {
+              "internalType": "bool",
+              "name": "approveCustomer",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "medications",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "productName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "category",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "imageUrl",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "pricePerUnit",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "stockQuantity",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isListed",
-        "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "isAvailable",
-        "type": "bool"
-      },
-      {
-        "internalType": "uint256",
-        "name": "expiryDate",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "isPrescriptionRequired",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+          }
+      ],
+      "name": "escrowToOneTimeCode",
+      "outputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          }
+      ],
+      "name": "getDispute",
+      "outputs": [
+          {
+              "internalType": "address",
+              "name": "customer",
+              "type": "address"
+          },
+          {
+              "internalType": "string",
+              "name": "reason",
+              "type": "string"
+          },
+          {
+              "internalType": "bool",
+              "name": "resolved",
+              "type": "bool"
+          },
+          {
+              "internalType": "bool",
+              "name": "approveCustomer",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_medicationId",
+              "type": "uint256"
+          }
+      ],
+      "name": "getMedicationDetails",
+      "outputs": [
+          {
+              "components": [
+                  {
+                      "internalType": "uint256",
+                      "name": "id",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "productName",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "category",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "imageUrl",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "pricePerUnit",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "stockQuantity",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "bool",
+                      "name": "isListed",
+                      "type": "bool"
+                  },
+                  {
+                      "internalType": "bool",
+                      "name": "isAvailable",
+                      "type": "bool"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "expiryDate",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "address",
+                      "name": "owner",
+                      "type": "address"
+                  },
+                  {
+                      "internalType": "bool",
+                      "name": "isPrescriptionRequired",
+                      "type": "bool"
+                  }
+              ],
+              "internalType": "struct Marketplace.Medication",
+              "name": "",
+              "type": "tuple"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
     "inputs": [],
-    "name": "nextMedicationId",
+    "name": "getMedications",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint256[]",
         "name": "",
-        "type": "uint256"
+        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "platformAdmin",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "bytes32",
+              "name": "escrowId",
+              "type": "bytes32"
+          }
+      ],
+      "name": "getOneTimeCode",
+      "outputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [],
-    "name": "platformFeePercent",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "string",
+              "name": "_transactionId",
+              "type": "string"
+          }
+      ],
+      "name": "getTransactionDetails",
+      "outputs": [
+          {
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
+          },
+          {
+              "internalType": "address",
+              "name": "seller",
+              "type": "address"
+          },
+          {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "isCompleted",
+              "type": "bool"
+          },
+          {
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "isCodeGenerated",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_medicationId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_quantityBought",
-        "type": "uint256"
-      }
-    ],
-    "name": "purchaseMedication",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "name": "medicationToEscrow",
+      "outputs": [
+          {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "reason",
-        "type": "string"
-      }
-    ],
-    "name": "raiseDispute",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "name": "medications",
+      "outputs": [
+          {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+          },
+          {
+              "internalType": "string",
+              "name": "productName",
+              "type": "string"
+          },
+          {
+              "internalType": "string",
+              "name": "category",
+              "type": "string"
+          },
+          {
+              "internalType": "string",
+              "name": "imageUrl",
+              "type": "string"
+          },
+          {
+              "internalType": "uint256",
+              "name": "pricePerUnit",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "stockQuantity",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "isListed",
+              "type": "bool"
+          },
+          {
+              "internalType": "bool",
+              "name": "isAvailable",
+              "type": "bool"
+          },
+          {
+              "internalType": "uint256",
+              "name": "expiryDate",
+              "type": "uint256"
+          },
+          {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+          },
+          {
+              "internalType": "bool",
+              "name": "isPrescriptionRequired",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_medicationId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "providedOneTimeCode",
-        "type": "uint256"
-      }
-    ],
-    "name": "releasePayment",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [],
+      "name": "nextMedicationId",
+      "outputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "approveCustomer",
-        "type": "bool"
-      }
-    ],
-    "name": "resolveDispute",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [],
+      "name": "platformAdmin",
+      "outputs": [
+          {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_medicationId",
-        "type": "uint256"
-      }
-    ],
-    "name": "toggleListing",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [],
+      "name": "platformFeePercent",
+      "outputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "name": "transactions",
-    "outputs": [
-      {
-        "internalType": "address payable",
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "internalType": "address payable",
-        "name": "seller",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isCompleted",
-        "type": "bool"
-      },
-      {
-        "internalType": "uint256",
-        "name": "medicineId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "oneTimeCode",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isCodeGenerated",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_medicationId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "_quantityBought",
+              "type": "uint256"
+          }
+      ],
+      "name": "purchaseMedication",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_medicationId",
-        "type": "uint256"
-      }
-    ],
-    "name": "unlistMedication",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "string",
+              "name": "reason",
+              "type": "string"
+          }
+      ],
+      "name": "raiseDispute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_medicationId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "_isAvailable",
-        "type": "bool"
-      }
-    ],
-    "name": "updateAvailability",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_medicationId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "providedOneTimeCode",
+              "type": "uint256"
+          }
+      ],
+      "name": "releasePayment",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_newFee",
-        "type": "uint256"
-      }
-    ],
-    "name": "updatePlatformFee",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "approveCustomer",
+              "type": "bool"
+          }
+      ],
+      "name": "resolveDispute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_medicationId",
+              "type": "uint256"
+          }
+      ],
+      "name": "toggleListing",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+          }
+      ],
+      "name": "transactions",
+      "outputs": [
+          {
+              "internalType": "address payable",
+              "name": "buyer",
+              "type": "address"
+          },
+          {
+              "internalType": "address payable",
+              "name": "seller",
+              "type": "address"
+          },
+          {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "isCompleted",
+              "type": "bool"
+          },
+          {
+              "internalType": "uint256",
+              "name": "medicineId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "oneTimeCode",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "isCodeGenerated",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_medicationId",
+              "type": "uint256"
+          }
+      ],
+      "name": "unlistMedication",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_medicationId",
+              "type": "uint256"
+          },
+          {
+              "internalType": "bool",
+              "name": "_isAvailable",
+              "type": "bool"
+          }
+      ],
+      "name": "updateAvailability",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "_newFee",
+              "type": "uint256"
+          }
+      ],
+      "name": "updatePlatformFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
   }
 ]

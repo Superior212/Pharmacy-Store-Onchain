@@ -4,3 +4,4 @@ export { default as TransactionTable } from "./TransactionTable";
 export { default as Consultations } from "./Consultations";
 export { default as WalletTransactions } from "./WalletTransactions";
 export { default as Purchases } from "./Purchases";
+

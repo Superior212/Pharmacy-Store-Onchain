@@ -20,3 +20,20 @@ interface UserInputs {
     dateOfBirth?: string;
     businessNumber: number;
   }
+
+      
+
+  }
+  interface ProductInfo {
+      category: string;
+      expiryDate: number;
+      id: number;
+      imageUrl: string;
+      isAvailable: boolean;
+      isListed: boolean;
+      isPrescriptionRequired: boolean;
+      owner: string;
+      pricePerUnit: number;
+      productName: string;
+      stockQuantity: number;
+  }
