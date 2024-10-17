@@ -1,13 +1,17 @@
+'use client'
 import Image from "next/image";
 import { Star } from "lucide-react";
 import Link from "next/link";
+import { useProduct } from "@/provider/ProductProvider";
+import { ethers } from "ethers";
 
 export default function FeaturedProducts() {
+  const {products, isFetching} = useProduct()
   return (
     <div className="bg-[#202E48] text-white p-6 md:p-12 rounded-3xl">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold">Featured Products</h2>
+          <h2 className="text-2xl md:text-3xl font-bold">{isFetching? "Fetching Featured Products..." : "Featured Products"}</h2>
           <Link
             href="/medications"
             className="text-sm text-gray-300 hover:text-white transition-colors">
@@ -19,30 +23,21 @@ export default function FeaturedProducts() {
           closer to a healthier future
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <ProductCard
-            callToActionLink="/medications/1"
-            imageUrl="/product.svg"
-            name="Acetaminophen Pills"
-            rating={20}
-            priceEth={0.002}
-            priceUsd={12}
-          />
-          <ProductCard
-               callToActionLink="/medications/2"
-            imageUrl="/product2.svg"
-            name="Acetaminophen Pills"
-            rating={20}
-            priceEth={0.002}
-            priceUsd={12}
-          />
-          <ProductCard
-          callToActionLink="/medications/3"
-            imageUrl="/product3.svg"
-            name="Acetaminophen Pills"
-            rating={20}
-            priceEth={0.002}
-            priceUsd={12}
-          />
+        {
+              products.slice(0, 3).map((product)=>{
+                return (
+                  <ProductCard
+                    key={product.id}
+                    callToActionLink={`/medications/${product.id}`}
+                    imageUrl="/product.svg"
+                    name={product.productName}
+                    rating={20}
+                    priceEth={parseInt(ethers.formatEther(product.pricePerUnit))}
+                    priceUsd={12} />
+                );
+              })
+            }
+
         </div>
       </div>
     </div>

@@ -12,6 +12,6 @@ export const UserManagementContract = {
   abi: userManagementAbi,
 };
 export const PrescriptionManagement = {
-  address: "0x798AA46f2caBdd946e0b0E7192dD973b276B8fAC",
+  address: "0xbaac6B08CA911d6c5e8a84aD8B6EBC0f90C14FCc",
   abi: prescriptionAbi,
 };

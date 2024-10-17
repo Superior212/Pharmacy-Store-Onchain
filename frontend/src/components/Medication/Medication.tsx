@@ -6,6 +6,8 @@ import ProductListing from "./ProductListing";
 
 
 const Medication = () => {
+
+
   const [searchText, setSearchText] = useState("");
   return (
     <main className="w-full mx-auto pt-4">

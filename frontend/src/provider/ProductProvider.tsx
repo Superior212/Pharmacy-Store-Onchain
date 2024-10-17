@@ -1,11 +1,13 @@
 'use client'
 import { MarketPlaceContract } from "@/constant";
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useReadContract } from "wagmi";
 import { readContract } from '@wagmi/core'
 import { config } from "@/config";
 
-const ProductContext = createContext<{products:ProductInfo[] | []}>({products:[]});
+const ProductContext = createContext<{products:ProductInfo[] | [], isFetching:boolean}>({products:[],
+  isFetching:false
+});
 
 export const useProduct = () => useContext(ProductContext);
 
@@ -20,8 +22,9 @@ const {data:medicationIdsArray, error, isLoading} = useReadContract({
     args: [],
 });
 
-if(error) console.log({error})
-  const medicationIds = medicationIdsArray as Array<BigInt> || [];
+if(error) console.error("ProductProvider", error);
+const medicationIds = useMemo(() => medicationIdsArray as Array<number> || [], [medicationIdsArray])
+
   useEffect(() => {
     for (let index = 0; index < medicationIds.length; index++) {
       readContract(config, {
@@ -30,7 +33,6 @@ if(error) console.log({error})
          functionName: 'getMedicationDetails',
          args: [medicationIds[index]],
        }).then((res)=> {
-         console.log({res})
        setProducts((prev) => [...prev, res as ProductInfo]);
        
        }).catch((err)=> console.log("ProductProvider", err))
@@ -38,12 +40,8 @@ if(error) console.log({error})
 
   }, [medicationIds])
   
-
-
-
-console.log({products})
   return (
-    <ProductContext.Provider value={{products: products}}>{children}</ProductContext.Provider>
+    <ProductContext.Provider value={{products: products, isFetching:isLoading}}>{children}</ProductContext.Provider>
   )
 }
 
