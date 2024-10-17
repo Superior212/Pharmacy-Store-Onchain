@@ -1,8 +1,9 @@
-import Image from "next/image";
 import { Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function FeaturedPharmacyStores() {
+  // const {stores, isFetching} = useStore()
   return (
     <div className="bg-[#EFEFEF] my-10 p-6 md:p-12 rounded-3xl">
       <div className="max-w-6xl mx-auto">
@@ -13,6 +14,7 @@ export default function FeaturedPharmacyStores() {
               <br />
               Pharmacy Stores
             </h2>
+            
             <p className="text-gray-600 max-w-2xl">
               Libero diam auctor tristique hendrerit in eu vel id. Nec leo amet
               suscipit nulla. Nullam vitae sit tempus diam.
