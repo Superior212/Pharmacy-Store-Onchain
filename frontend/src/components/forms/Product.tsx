@@ -14,7 +14,7 @@ const Product = () => {
       firstName: yup.string().required("Please enter your first name"),
       lastName: yup.string().required("Please enter your last name"),
       description: yup.string().required("Please enter your description"),
-      isWalletVerified: yup.boolean().required(),
+      isInAgreement: yup.boolean().required(),
       yearsOfExperience: yup.string().required("Please enter your experience"),
       clinicName: yup.string().required("Please enter your clinic name"),
       licenceNumber: yup.string().required("Please enter your licence number"),
@@ -25,7 +25,7 @@ const Product = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<HealthOfficerFormInputs>({
+  } = useForm<CareProvidersFormInputs>({
     resolver: yupResolver(schema),
   });
 
