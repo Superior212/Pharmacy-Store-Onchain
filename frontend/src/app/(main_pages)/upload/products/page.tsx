@@ -1,6 +1,6 @@
 "use client"
 
-import { FormHeader, Product } from "@/components/forms"
+import { FormHeader } from "@/components/forms"
 // import { useState } from "react"
 
 
@@ -27,7 +27,8 @@ const Products = () => {
       </header>
 
       <main className="mt-8">
-        <Product />
+        Just for Merging Conflicts
+        {/* <Product /> */}
       </main>
     </div>
   )

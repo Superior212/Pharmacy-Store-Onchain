@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { General, Appointments, TransactionTable } from "@/components/userProfile";
+import { General, Appointments, TransactionTable, Purchases } from "@/components/userProfile";
 import { Bell } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -11,9 +11,10 @@ const UserProfile = () => {
   const [tabPage, setTabPage] = useState("General")
 
   const tabs = ['General', 'Wallet & Transactions', 'Consultations', 'Product Purchase'];
+  // enum userRole {Patient, Pharmacy, Doctor};
 
   const handleFormDisplay = (name: string) => {
-    setTabPage(name)
+    setTabPage(name);
   }
 
   const active = "bg-[#1364FF] text-gray-100 bg-blue-600 transition-colors";
@@ -73,8 +74,9 @@ const UserProfile = () => {
             ))}
           </nav>
        </div>
+       
         <main className="">
-         {tabPage === "Patient" ? <General /> : tabPage === "Wallet & Transactions" ? <TransactionTable /> : tabPage === "Consultations" ? <Appointments /> :  <General />}
+         {tabPage === "Patient" ? <General /> : tabPage === "Wallet & Transactions" ? <TransactionTable /> : tabPage === "Consultations" ? <Appointments /> :  <Purchases />}
         </main>
     </div>
   )

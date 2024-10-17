@@ -2,6 +2,7 @@
 
 import { FormHeader, Patient, HealthOfficers, CareProviders } from "@/components/forms"
 import { useState } from "react"
+import { ToastContainer } from "react-toastify"
 
 
 const ProfileSetup = () => {
@@ -32,6 +33,18 @@ const ProfileSetup = () => {
       <main className="mt-8">
         {form === "Patient" ? <Patient /> : form === "Health Officers" ? <HealthOfficers /> : <CareProviders />}
       </main>
+      <ToastContainer 
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     </div>
   )
 }
