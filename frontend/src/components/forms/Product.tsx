@@ -8,26 +8,26 @@
 
 // const Product = () => {
 
-//   const schema = yup
-//     .object()
-//     .shape({
-//       firstName: yup.string().required("Please enter your first name"),
-//       lastName: yup.string().required("Please enter your last name"),
-//       description: yup.string().required("Please enter your description"),
-//       isInAgreement: yup.boolean().required(),
-//       yearsOfExperience: yup.string().required("Please enter your experience"),
-//       clinicName: yup.string().required("Please enter your clinic name"),
-//       licenceNumber: yup.string().required("Please enter your licence number"),
+  // const schema = yup
+  //   .object()
+  //   .shape({
+  //     firstName: yup.string().required("Please enter your first name"),
+  //     lastName: yup.string().required("Please enter your last name"),
+  //     description: yup.string().required("Please enter your description"),
+  //     isWalletVerified: yup.boolean().required(),
+  //     yearsOfExperience: yup.string().required("Please enter your experience"),
+  //     clinicName: yup.string().required("Please enter your clinic name"),
+  //     licenceNumber: yup.string().required("Please enter your licence number"),
 
-//     })
-//     .required();
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<CareProvidersFormInputs>({
-//     resolver: yupResolver(schema),
-//   });
+  //   })
+  //   .required();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm<HealthOfficerFormInputs>({
+  //   resolver: yupResolver(schema),
+  // });
 
 //   return (
 //     <form onSubmit={handleSubmit((data) => console.log(data))} className="w-full flex flex-col gap-6">
