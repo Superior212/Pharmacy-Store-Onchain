@@ -27,6 +27,7 @@ const Products = () => {
       </header>
 
       <main className="mt-8">
+        Just for Merging Conflicts
         {/* <Product /> */}
       </main>
     </div>
