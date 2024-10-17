@@ -46,8 +46,9 @@ const HealthOfficers = () => {
       args: [data.firstName, data.lastName, data.description, data.yearsOfExperience, data.clinicName, data.licenceNumber, data.medicalCertificateHash]
     })
     
-    
-    isSuccess ? reset() : null;
+    if(isSuccess) {
+      reset();
+    }
     
   }
   
@@ -156,8 +157,8 @@ const HealthOfficers = () => {
         <label htmlFor="isInAgreement" className="text-sm text-gray-500 flex items-center gap-5">
           <input {...register("isInAgreement")} type="checkbox" className="w-6 h-6" name="isWalletVerified" required />
           I consent to the terms and conditions
-        </label>
 
+        </label>
         <button type="submit" disabled={isPending} className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg hover:bg-blue-400 transition-colors">{isPending ? "Processing..." : "Submit"}</button>
       </div>
       

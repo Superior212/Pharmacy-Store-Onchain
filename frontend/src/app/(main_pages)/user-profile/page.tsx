@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { General, Appointments, TransactionTable, Consultations, WalletTransactions, Purchases } from "@/components/userProfile";
+import { General, Appointments, TransactionTable, Purchases } from "@/components/userProfile";
 import { Bell } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";

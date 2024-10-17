@@ -46,7 +46,9 @@ const CareProviders = () => {
     })
     
     
-    isSuccess ? reset() : null;
+    if(isSuccess) {
+      reset();
+    }
     
   }
   

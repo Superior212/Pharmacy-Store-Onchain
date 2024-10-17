@@ -47,7 +47,9 @@ const Patient = () => {
     })
     
     
-    isSuccess ? reset() : null;
+    if(isSuccess) {
+      reset();
+    }
     
   } 
 
