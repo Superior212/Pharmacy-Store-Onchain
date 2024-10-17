@@ -61,6 +61,7 @@ contract Marketplace {
 
     mapping(uint256 => Medication) public medications;
     mapping(bytes32 => Transaction) public transactions;
+    mapping(bytes32 => address) public transactionToAddress;
     mapping(uint256 => Dispute) public disputes;
     mapping(uint256 => bytes32) public medicationToEscrow;
     mapping(bytes32 => uint256) public escrowToOneTimeCode;
@@ -242,6 +243,7 @@ contract Marketplace {
 
         // Store the one-time code separately
         escrowToOneTimeCode[escrowId] = oneTimeCode;
+        transactionToAddress[escrowId] = msg.sender;
 
         emit EscrowCreated(
             escrowId,
@@ -253,6 +255,10 @@ contract Marketplace {
         );
 
         return escrowId;
+    }
+
+    function getTransactionAddress(bytes32 escrowId) external view returns (address) {
+    return transactionToAddress[escrowId];
     }
 
     function releasePayment(
