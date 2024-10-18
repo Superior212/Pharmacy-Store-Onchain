@@ -5,16 +5,61 @@ import { General, Appointments, TransactionTable } from "@/components/userProfil
 import { Bell } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useReadContract, useAccount } from 'wagmi';
+import { UserManagementContract } from '@/constant';
+import { log } from "console";
+import { ResourceUnavailableRpcError } from "viem";
 
 const UserProfile = () => {
+  const { address } = useAccount();
 
-  const [tabPage, setTabPage] = useState("General")
+  console.log(address);
+
+  const { data: profileData, isLoading: loadingProfile, error } = useReadContract({
+    abi: UserManagementContract.abi,
+    address: UserManagementContract.address as `0x${string}`,
+    functionName: "getPatientProfile",
+    args: [address],
+  });
+
+  const { data: roleData, isLoading: loadingRole, error: roleError } = useReadContract({
+    abi: UserManagementContract.abi,
+    address: UserManagementContract.address as `0x${string}`,
+    functionName: "getRole",
+    args: [address],
+  });
+  
+
+  const [tabPage, setTabPage] = useState("user-profile")
 
   const tabs = ['General', 'Wallet & Transactions', 'Consultations', 'Product Purchase'];
 
   const handleFormDisplay = (name: string) => {
     setTabPage(name)
   }
+
+  if (error || loadingRole) return <p>Loading...</p>
+  if(error) return <p>Error Loading Profile: {error}</p>
+  if (roleError) return <p>Error loading role: {roleError.message}</p>;
+
+  const PatientProfile = profileData as string[]; 
+  const getRole = roleData as number;
+  console.log("PatientProfile: ", PatientProfile);
+  console.log("getRole: ", getRole);
+  
+
+
+  const getRoleDescription = (role: number) => {
+    switch (role) {
+      case 1:
+        return "Patient";
+
+      default:
+        return "Unknown Role";
+    }
+  };
+
+  
 
   const active = "bg-[#1364FF] text-gray-100 bg-blue-600 transition-colors";
 
@@ -38,7 +83,7 @@ const UserProfile = () => {
         </div>
         <div className='flex flex-col w-full gap-1'>
         <div className="flex w-full justify-between">
-          <h1 className="text-2xl font-bold">Berachi Reynolds</h1>
+          <h1 className="text-2xl font-bold">{PatientProfile[0]} {PatientProfile[1]}</h1>
           <div className="flex items-center">
             <Bell className="w-4 h-4 bg-gray-500 rounded-full p-4 mr-2 text-gray-50" />
             <Button variant="outline" className={`mr-4 ${button}`}>Edit</Button>
@@ -58,11 +103,7 @@ const UserProfile = () => {
             />
           ))}
         </div>
-        <p className="text-gray-600 my-4">
-          I'm your friendly pharmacist with a passion for making medication advice <br />
-          so fun. When I'm not whipping up prescriptions, I'm likely preparing
-          smoothies
-        </p>
+        <p className="text-gray-600 my-4">{PatientProfile[4]}</p>
         </div>
        </main>
 
