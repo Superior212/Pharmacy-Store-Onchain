@@ -14,7 +14,7 @@ const Product = () => {
       firstName: yup.string().required("Please enter your first name"),
       lastName: yup.string().required("Please enter your last name"),
       description: yup.string().required("Please enter your description"),
-      isWalletVerified: yup.boolean().required(),
+      isInAgreement: yup.boolean().required(),
       yearsOfExperience: yup.string().required("Please enter your experience"),
       clinicName: yup.string().required("Please enter your clinic name"),
       licenceNumber: yup.string().required("Please enter your licence number"),
@@ -120,8 +120,8 @@ const Product = () => {
 
     <div className="w-full md:w-3/4 lg:w-1/2 flex flex-col gap-6">
 
-      <label htmlFor="isWalletVerified" className="text-sm text-gray-500 flex items-center gap-5">
-        <input type="checkbox" required className="w-6 h-6" name="isWalletVerified" />
+      <label htmlFor="isInAgreement" className="text-sm text-gray-500 flex items-center gap-5">
+        <input type="checkbox" required className="w-6 h-6" name="isInAgreement" />
         I consent to the terms and conditions
       </label>
 
