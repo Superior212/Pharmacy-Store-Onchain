@@ -1,3 +1,5 @@
+"use client";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';

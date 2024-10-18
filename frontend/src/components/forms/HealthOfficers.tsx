@@ -1,3 +1,5 @@
+"use client";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -160,7 +162,7 @@ const HealthOfficers = () => {
 
         </label>
 
-        <button type="submit" className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg hover:bg-blue-400 transition-colors">Submit</button>
+        <button type="submit" className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg hover:bg-blue-400 transition-colors">{isPending ? "Processing..." : "Submit"}</button>
       </div>
       
     </form>
