@@ -28,7 +28,6 @@ interface ProductInfo {
     isAvailable: boolean;
     isListed: boolean;
     isPrescriptionRequired: boolean;
-    owner: string;
     pricePerUnit: number;
     productName: string;
     stockQuantity: number;

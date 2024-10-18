@@ -1,33 +1,71 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import * as yup from "yup";
-import { Select } from "../ui/select";
 import CustomInput from "./Input";
+import { useWriteContract } from 'wagmi'
+import { UserManagementContract } from "@/constant";
+
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 
 
 
 const Product = () => {
 
+  const { isPending, isSuccess, isError, writeContract } = useWriteContract()
+
   const schema = yup
     .object()
     .shape({
-      firstName: yup.string().required("Please enter your first name"),
-      lastName: yup.string().required("Please enter your last name"),
-      description: yup.string().required("Please enter your description"),
-      isInAgreement: yup.boolean().required(),
-      yearsOfExperience: yup.string().required("Please enter your experience"),
-      clinicName: yup.string().required("Please enter your clinic name"),
-      licenceNumber: yup.string().required("Please enter your licence number"),
-
+      category: yup.string().required("Please enter category"),
+      expiryDate: yup.number().required("Please enter expiry date"), 
+      id: yup.number().required("Please enter id"),
+      imageUrl: yup.string().required("Please enter image url"),
+      isAvailable: yup.boolean().required(),
+      isListed: yup.boolean().required(),
+      isPrescriptionRequired: yup.boolean(),
+      pricePerUnit: yup.number().required("Please enter price per product"),
+      productName: yup.string().required("Please enter product name"),
+      stockQuantity: yup.number().required("Please enter stock quantity for product"),
     })
     .required();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<HealthOfficerFormInputs>({
+  } = useForm<ProductInfo>({
     resolver: yupResolver(schema),
   });
+
+
+  const handleHealthOfficerSubmission = (data:UserInputs) => {
+  
+    writeContract({
+      address: "0x798AA46f2caBdd946e0b0E7192dD973b276B8fAC",
+      abi:UserManagementContract.abi,
+      functionName: 'registerPatient',
+      args: [data.firstName, data.lastName, data.dateOfBirth, data.description],
+    })
+    
+    
+    if(isSuccess) {
+      reset();
+    }
+    
+  } 
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Account Registration Successful!!");
+    }
+
+    if (isError) {
+      toast.error("Account Registration Failed!!")
+    }
+
+  }, [isSuccess, isError]);
+
 
   return (
     <form onSubmit={handleSubmit((data) => console.log(data))} className="w-full flex flex-col gap-6">
@@ -120,12 +158,14 @@ const Product = () => {
 
     <div className="w-full md:w-3/4 lg:w-1/2 flex flex-col gap-6">
 
-      <label htmlFor="isInAgreement" className="text-sm text-gray-500 flex items-center gap-5">
-        <input type="checkbox" required className="w-6 h-6" name="isInAgreement" />
+      <label htmlFor="isWalletVerified" className="text-sm text-gray-500 flex items-center gap-5">
+        <input type="checkbox" required className="w-6 h-6" name="isWalletVerified" />
         I consent to the terms and conditions
       </label>
 
-      <button type="submit" className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg">Submit</button>
+      <button type="submit" disabled={isPending} className="w-full md:w-[60%] lg:w-[93%] text-2xl text-center text-white bg-[#1364FF] py-3 rounded-lg">
+        {isPending ? "Processing..." : "Submit"}
+      </button>
     </div>
     </div>
   </form>

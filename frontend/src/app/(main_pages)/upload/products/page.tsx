@@ -1,7 +1,5 @@
-"use client"
-
 import { FormHeader, Product } from "@/components/forms"
-// import { useState } from "react"
+import { ToastContainer } from "react-toastify"
 
 
 const Products = () => {
@@ -16,6 +14,19 @@ const Products = () => {
       <main className="mt-8">
         <Product />
       </main>
+
+      <ToastContainer 
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     </div>
   )
 }
