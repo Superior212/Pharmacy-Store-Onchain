@@ -23,8 +23,11 @@ contract Marketplace {
 
     struct Medication {
         uint256 id;
+        string brand;
+        string store;
         string productName;
         string category;
+        string description;
         string imageUrl;
         uint256 pricePerUnit;
         uint256 stockQuantity;
@@ -58,6 +61,7 @@ contract Marketplace {
 
     mapping(uint256 => Medication) public medications;
     mapping(bytes32 => Transaction) public transactions;
+    mapping(bytes32 => address) public transactionToAddress;
     mapping(uint256 => Dispute) public disputes;
     mapping(uint256 => bytes32) public medicationToEscrow;
     mapping(bytes32 => uint256) public escrowToOneTimeCode;
@@ -122,8 +126,11 @@ contract Marketplace {
     }
 
     function createMedication(
+        string memory brand,
+        string memory store,
         string memory _productName,
         string memory _category,
+        string memory _description,
         string memory _imageUrl,
         uint256 _pricePerUnit,
         uint256 _stockQuantity,
@@ -134,8 +141,11 @@ contract Marketplace {
 
         medications[nextMedicationId] = Medication({
             id: nextMedicationId,
+            brand: _brand,
+            store: _store,
             productName: _productName,
             category: _category,
+            description: _description,
             imageUrl: _imageUrl,
             pricePerUnit: _pricePerUnit,
             stockQuantity: _stockQuantity,
@@ -233,6 +243,7 @@ contract Marketplace {
 
         // Store the one-time code separately
         escrowToOneTimeCode[escrowId] = oneTimeCode;
+        transactionToAddress[escrowId] = msg.sender;
 
         emit EscrowCreated(
             escrowId,
@@ -244,6 +255,10 @@ contract Marketplace {
         );
 
         return escrowId;
+    }
+
+    function getTransactionAddress(bytes32 escrowId) external view returns (address) {
+    return transactionToAddress[escrowId];
     }
 
     function releasePayment(
