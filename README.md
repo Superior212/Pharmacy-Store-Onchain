@@ -37,19 +37,17 @@ Doctors can write and upload prescriptions directly to the PharmaaX platform and
 
 
 ## Deployment Links
-
-- FrontEnd Link : https://pharmaax.vercel.app/
-- MedicineMarketPlace
-- PrescriptionManagement
-- UserManagement
+Users can interact and use the platform via the Live FrontEnd Link : https://pharmaax.vercel.app/
 
 ## Contract Addresses
-- MedicineMarketPlace
-- PrescriptionManagement
-- UserManagement
+- MedicineMarketPlace : [0xDb5Cee311F23bd0FA7c1f585bb703721e57457C5](https://sepolia-blockscout.lisk.com//address/0xDb5Cee311F23bd0FA7c1f585bb703721e57457C5#code)
+
+- PrescriptionManagement : [0x82511dB9583299cA75eedAA67251786FAA363544](https://sepolia-blockscout.lisk.com/address/0x82511dB9583299cA75eedAA67251786FAA363544#code)
+
+- UserManagement: [0x34B5D26FC98f4da8eD68b07F07BEcf3BEA16a9E0](https://sepolia-blockscout.lisk.com/address/0x34B5D26FC98f4da8eD68b07F07BEcf3BEA16a9E0#code)
 
 ## Testing
-The smart contracts were tested using Hardhat for unit testing and integration tests to ensure proper functionality. The tests include payment processing, prescription validation, escrow services, and user profile management. Detailed test results and documentation are available in the tests folder.
+The smart contracts were tested using Hardhat for unit testing and integration tests to ensure proper functionality. The tests include payment processing, prescription validation, escrow services, and user profile management. The test results are available in the [tests folder](https://github.com/Superior212/Pharmacy-Store-Onchain/tree/main/SmartContract/test).
 
 ## Authors
 - Samson Aderonmu - https://github.com/Superior212
