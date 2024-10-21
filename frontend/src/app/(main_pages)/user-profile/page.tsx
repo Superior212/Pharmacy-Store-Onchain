@@ -40,26 +40,8 @@ const UserProfile = () => {
 
   if (error || loadingRole) return <p>Loading...</p>
   if(error) return <p>Error Loading Profile: {error}</p>
-  if (roleError) return <p>Error loading role: {roleError.message}</p>;
 
   const PatientProfile = profileData as string[]; 
-  const getRole = roleData as number;
-  console.log("PatientProfile: ", PatientProfile);
-  console.log("getRole: ", getRole);
-  
-
-
-  const getRoleDescription = (role: number) => {
-    switch (role) {
-      case 1:
-        return "Patient";
-
-      default:
-        return "Unknown Role";
-    }
-  };
-
-  
 
   const active = "bg-[#1364FF] text-gray-100 bg-blue-600 transition-colors";
 
@@ -103,7 +85,7 @@ const UserProfile = () => {
             />
           ))}
         </div>
-        <p className="text-gray-600 my-4">{PatientProfile[4]}</p>
+        <p className="text-gray-600 my-4">{PatientProfile[3]}</p>
         </div>
        </main>
 
