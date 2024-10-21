@@ -11,7 +11,7 @@ const Hero = () => {
         </h1>
         <div className="text-center sm:text-left">
           <p className='text-white text-base sm:text-lg md:text-lg mb-10 md:w-3/4'>
-            You’re just one step away from speaking with a doctor. Enjoy secure, private session to discuss your health concerns.
+            You're just one step away from speaking with a doctor. Enjoy secure, private session to discuss your health concerns.
           </p>
           <Button
             className="bg-white text-blue-600 rounded-full px-8 py-2 text-sm sm:text-base"
